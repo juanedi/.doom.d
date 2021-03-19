@@ -57,3 +57,11 @@
   (kbd "C-H") #'evil-first-non-blank
   (kbd "C-L") #'evil-end-of-line
   )
+
+(map! :leader
+      (:prefix ("e" . "Compilation errors")
+       :desc "Go to first flycheck error"     "f" #'flycheck-first-error
+       :desc "Go to next flycheck error"      "n" #'flycheck-next-error
+       :desc "Go to previous flycheck error"  "p" #'flycheck-previous-error
+       ))
+
