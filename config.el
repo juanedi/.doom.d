@@ -69,6 +69,7 @@
        :desc "Go to first error"     "f" #'flycheck-first-error
        :desc "Go to next error"      "n" #'flycheck-next-error
        :desc "Go to previous error"  "p" #'flycheck-previous-error
+       :desc "Recompile buffer"      "r" #'flycheck-buffer
        )
 
       ;; override: follow after splitting by default
