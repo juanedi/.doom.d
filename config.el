@@ -53,16 +53,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(evil-define-key* 'normal 'global
-  (kbd "C-H") #'evil-first-non-blank
-  (kbd "C-L") #'evil-end-of-line
+(map!
+  :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
+  :n "C-H" #'evil-first-non-blank
+  :n "C-L" #'evil-end-of-line
   )
-
-(evil-define-key* 'insert 'global
-  (kbd "s-s") (lambda () (interactive)
-                (progn
-                  (evil-escape)
-                  (save-buffer))))
 
 (map! :leader
       (:prefix ("e" . "Compilation errors")
