@@ -72,3 +72,17 @@
       "w s" #'+evil/window-split-and-follow
       "w x" #'kill-buffer-and-window
       )
+
+;; NOTE: I use dir-locals to set tell flycheck to use elm-test for spec files
+;; that is done by calling elm-test-runner--buffer-is-test-p, which is not
+;; autoloaded. I should change the package to autoload that function, but in the
+;; meantime this will do.
+(add-hook! elm-mode (require 'elm-test-runner))
+
+(map! :map elm-mode-map
+      (:leader
+       (:prefix ("m t" . "Tests")
+        :desc "Run tests in buffer"                    "b"   #'elm-test-runner-run
+        :desc "Re-run last test"                       "r"   #'elm-test-runner-rerun
+        :desc "Toggle between test and implementation" "TAB" #'elm-test-runner-toggle-test-and-target
+        )))
