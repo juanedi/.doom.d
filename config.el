@@ -66,8 +66,12 @@
 
 (map! :leader
       (:prefix ("e" . "Compilation errors")
-       :desc "Go to first flycheck error"     "f" #'flycheck-first-error
-       :desc "Go to next flycheck error"      "n" #'flycheck-next-error
-       :desc "Go to previous flycheck error"  "p" #'flycheck-previous-error
-       ))
+       :desc "Go to first error"     "f" #'flycheck-first-error
+       :desc "Go to next error"      "n" #'flycheck-next-error
+       :desc "Go to previous error"  "p" #'flycheck-previous-error
+       )
 
+      ;; override: follow after splitting by default
+      "w v" #'+evil/window-vsplit-and-follow
+      "w s" #'+evil/window-split-and-follow
+      )
