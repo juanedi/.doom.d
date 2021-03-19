@@ -58,6 +58,12 @@
   (kbd "C-L") #'evil-end-of-line
   )
 
+(evil-define-key* 'insert 'global
+  (kbd "s-s") (lambda () (interactive)
+                (progn
+                  (evil-escape)
+                  (save-buffer))))
+
 (map! :leader
       (:prefix ("e" . "Compilation errors")
        :desc "Go to first flycheck error"     "f" #'flycheck-first-error
