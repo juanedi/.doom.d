@@ -75,4 +75,5 @@
       ;; override: follow after splitting by default
       "w v" #'+evil/window-vsplit-and-follow
       "w s" #'+evil/window-split-and-follow
+      "w x" #'kill-buffer-and-window
       )
