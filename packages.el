@@ -52,3 +52,5 @@
 (package! elm-test-runner)
 
 (package! centered-cursor-mode)
+
+(package! flycheck-posframe)

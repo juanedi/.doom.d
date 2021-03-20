@@ -98,4 +98,6 @@
         :desc "Toggle between test and implementation" "TAB" #'elm-test-runner-toggle-test-and-target
         )))
 
+(flycheck-posframe-configure-pretty-defaults)
+(setq flycheck-posframe-position 'frame-bottom-right-corner)
 (global-centered-cursor-mode)
