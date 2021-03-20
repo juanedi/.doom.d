@@ -53,6 +53,46 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; -----------------------------------------------
+;; Elm
+;; -----------------------------------------------
+
+;; NOTE: I use dir-locals to set tell flycheck to use elm-test for spec files
+;; that is done by calling elm-test-runner--buffer-is-test-p, which is not
+;; autoloaded. I should change the package to autoload that function, but in the
+;; meantime this will do.
+(add-hook! elm-mode (require 'elm-test-runner))
+
+(setq elm-format-on-save t)
+
+(map! :map elm-mode-map
+      (:leader
+       (:prefix ("m t" . "tests")
+        :desc "Run tests in buffer"                    "b"   #'elm-test-runner-run
+        :desc "Re-run last test"                       "r"   #'elm-test-runner-rerun
+        :desc "Toggle between test and implementation" "TAB" #'elm-test-runner-toggle-test-and-target
+        )))
+
+
+;; -----------------------------------------------
+;; Flycheck
+;; -----------------------------------------------
+(flycheck-posframe-configure-pretty-defaults)
+(setq flycheck-posframe-position 'frame-bottom-right-corner)
+
+(global-centered-cursor-mode)
+
+(map! :leader
+      (:prefix ("e" . "Compilation errors")
+       :desc "Go to first error"     "f" #'flycheck-first-error
+       :desc "Go to next error"      "n" #'flycheck-next-error
+       :desc "Go to previous error"  "p" #'flycheck-previous-error
+       :desc "Recompile buffer"      "r" #'flycheck-buffer
+       ))
+
+;; -----------------------------------------------
+;; Misc
+;; -----------------------------------------------
 
 (use-package! which-key
   :config
@@ -65,12 +105,6 @@
   )
 
 (map! :leader
-      (:prefix ("e" . "Compilation errors")
-       :desc "Go to first error"     "f" #'flycheck-first-error
-       :desc "Go to next error"      "n" #'flycheck-next-error
-       :desc "Go to previous error"  "p" #'flycheck-previous-error
-       :desc "Recompile buffer"      "r" #'flycheck-buffer
-       )
       (:prefix ("s" . "search/symbol")
        ;; :desc "Highlight symbol" "c" #'evil-ex-highligh
        :desc "Reset highlight"  "c" #'evil-ex-nohighlight
@@ -81,23 +115,3 @@
       "w s" #'+evil/window-split-and-follow
       "w x" #'kill-buffer-and-window
       )
-
-;; NOTE: I use dir-locals to set tell flycheck to use elm-test for spec files
-;; that is done by calling elm-test-runner--buffer-is-test-p, which is not
-;; autoloaded. I should change the package to autoload that function, but in the
-;; meantime this will do.
-(add-hook! elm-mode (require 'elm-test-runner))
-
-(setq elm-format-on-save t)
-
-(map! :map elm-mode-map
-      (:leader
-       (:prefix ("m t" . "Tests")
-        :desc "Run tests in buffer"                    "b"   #'elm-test-runner-run
-        :desc "Re-run last test"                       "r"   #'elm-test-runner-rerun
-        :desc "Toggle between test and implementation" "TAB" #'elm-test-runner-toggle-test-and-target
-        )))
-
-(flycheck-posframe-configure-pretty-defaults)
-(setq flycheck-posframe-position 'frame-bottom-right-corner)
-(global-centered-cursor-mode)
