@@ -71,6 +71,10 @@
        :desc "Go to previous error"  "p" #'flycheck-previous-error
        :desc "Recompile buffer"      "r" #'flycheck-buffer
        )
+      (:prefix ("s" . "search/symbol")
+       ;; :desc "Highlight symbol" "c" #'evil-ex-highligh
+       :desc "Reset highlight"  "c" #'evil-ex-nohighlight
+       )
 
       ;; override: follow after splitting by default
       "w v" #'+evil/window-vsplit-and-follow
