@@ -79,6 +79,8 @@
 ;; meantime this will do.
 (add-hook! elm-mode (require 'elm-test-runner))
 
+(setq elm-format-on-save t)
+
 (map! :map elm-mode-map
       (:leader
        (:prefix ("m t" . "Tests")
