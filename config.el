@@ -99,6 +99,11 @@
        :desc "Recompile buffer"      "r" #'flycheck-buffer
        ))
 
+;; make sure envrc is loaded before detecting available checkers
+(add-hook 'flycheck-before-syntax-check-hook (lambda ()
+                                               (when (locate-dominating-file default-directory ".envrc")
+                                                 (envrc-reload))))
+
 ;; -----------------------------------------------
 ;; Misc
 ;; -----------------------------------------------
