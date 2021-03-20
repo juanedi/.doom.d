@@ -78,7 +78,13 @@
 ;; Flycheck
 ;; -----------------------------------------------
 (flycheck-posframe-configure-pretty-defaults)
-(setq flycheck-posframe-position 'frame-bottom-right-corner)
+(setq
+  flycheck-posframe-border-width 10
+  flycheck-posframe-position 'frame-bottom-right-corner)
+
+(set-face-attribute 'flycheck-posframe-info-face    nil :foreground "#FFFFFF" :height 0.8)
+(set-face-attribute 'flycheck-posframe-warning-face nil :foreground "#FFFFFF" :height 0.8)
+(set-face-attribute 'flycheck-posframe-error-face   nil :foreground "#FFFFFF" :height 0.8)
 
 (global-centered-cursor-mode)
 
