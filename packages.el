@@ -50,3 +50,5 @@
 ;(unpin! t)
 
 (package! elm-test-runner)
+
+(package! centered-cursor-mode)

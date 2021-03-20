@@ -86,3 +86,5 @@
         :desc "Re-run last test"                       "r"   #'elm-test-runner-rerun
         :desc "Toggle between test and implementation" "TAB" #'elm-test-runner-toggle-test-and-target
         )))
+
+(global-centered-cursor-mode)
