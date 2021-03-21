@@ -163,6 +163,8 @@
        :desc "Reset highlight"  "c" #'evil-ex-nohighlight
        )
 
+      "c y" #'evilnc-copy-and-comment-lines
+
       "i k" #'+evil/insert-newline-above
       "i j" #'+evil/insert-newline-below
 
