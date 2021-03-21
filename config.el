@@ -116,9 +116,11 @@
 ;; -----------------------------------------------
 (flycheck-posframe-configure-pretty-defaults)
 (setq
+  flycheck-highlighting-mode 'lines
+  flycheck-navigation-minimum-level 'error
   flycheck-posframe-border-width 10
-  flycheck-posframe-position 'frame-bottom-right-corner
   flycheck-posframe-info-prefix "\u24be "
+  flycheck-posframe-position 'frame-bottom-right-corner
   )
 
 (set-face-attribute 'flycheck-posframe-info-face    nil :foreground "#FFFFFF" :height 0.8)
