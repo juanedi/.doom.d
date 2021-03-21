@@ -159,8 +159,8 @@
 
 (map! :leader
       (:prefix ("s" . "search/symbol")
-       ;; :desc "Highlight symbol" "c" #'evil-ex-highligh
-       :desc "Reset highlight"  "c" #'evil-ex-nohighlight
+       :desc "Reset highlight"               "c" #'evil-ex-nohighlight
+       :desc "Highlight symbol under point"  "h" (lambda () (interactive) (evil-ex-start-word-search nil 'forward 0 t))
        )
 
       "c y" #'evilnc-copy-and-comment-lines
