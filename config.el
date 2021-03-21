@@ -119,13 +119,15 @@
   flycheck-highlighting-mode 'lines
   flycheck-navigation-minimum-level 'error
   flycheck-posframe-border-width 10
+  flycheck-posframe-prefix "\u24be "
   flycheck-posframe-info-prefix "\u24be "
   flycheck-posframe-position 'frame-bottom-right-corner
   )
 
-(set-face-attribute 'flycheck-posframe-info-face    nil :foreground "#FFFFFF" :height 0.8)
-(set-face-attribute 'flycheck-posframe-warning-face nil :foreground "#FFFFFF" :height 0.8)
-(set-face-attribute 'flycheck-posframe-error-face   nil :foreground "#FFFFFF" :height 0.8)
+(set-face-attribute 'flycheck-posframe-face         nil :foreground "#FFFFFF" :height 0.9)
+(set-face-attribute 'flycheck-posframe-info-face    nil :foreground "#FFFFFF" :height 0.9)
+(set-face-attribute 'flycheck-posframe-warning-face nil :foreground "#FFFFFF" :height 0.9)
+(set-face-attribute 'flycheck-posframe-error-face   nil :foreground "#FFFFFF" :height 0.9)
 
 (global-centered-cursor-mode)
 
@@ -145,6 +147,9 @@
 ;; -----------------------------------------------
 ;; Misc
 ;; -----------------------------------------------
+
+;; use regular posframe errors for lsp instead of the custom sideline
+(setq lsp-ui-sideline-enable nil)
 
 (use-package! which-key
   :config
