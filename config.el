@@ -132,7 +132,7 @@
 (global-centered-cursor-mode)
 
 (map! :leader
-      (:prefix ("e" . "Compilation errors")
+      (:prefix ("e" . "compilation errors")
        :desc "Go to first error"     "f" #'flycheck-first-error
        :desc "Go to next error"      "n" #'flycheck-next-error
        :desc "Go to previous error"  "p" #'flycheck-previous-error
