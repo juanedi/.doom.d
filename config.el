@@ -163,6 +163,8 @@
        :desc "Highlight symbol under point"  "h" (lambda () (interactive) (evil-ex-start-word-search nil 'forward 0 t))
        )
 
+      "TAB" #'evil-switch-to-windows-last-buffer
+
       "c y" #'evilnc-copy-and-comment-lines
 
       "i k" #'+evil/insert-newline-above
