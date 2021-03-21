@@ -140,9 +140,7 @@
        ))
 
 ;; make sure envrc is loaded before detecting available checkers
-(add-hook 'flycheck-before-syntax-check-hook (lambda ()
-                                               (when (locate-dominating-file default-directory ".envrc")
-                                                 (envrc-reload))))
+(add-hook 'flycheck-before-syntax-check-hook #'+direnv-init-h)
 
 ;; -----------------------------------------------
 ;; Misc
