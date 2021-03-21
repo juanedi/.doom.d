@@ -154,6 +154,7 @@
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
   :n "C-L" #'evil-end-of-line
+  :n "C-SPC" #'ivy-switch-buffer
   )
 
 (map! :leader
