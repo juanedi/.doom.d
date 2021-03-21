@@ -163,8 +163,11 @@
        :desc "Reset highlight"  "c" #'evil-ex-nohighlight
        )
 
-      ;; override: follow after splitting by default
+      "i k" #'+evil/insert-newline-above
+      "i j" #'+evil/insert-newline-below
+
       "w v" #'+evil/window-vsplit-and-follow
       "w s" #'+evil/window-split-and-follow
+
       "w x" #'kill-buffer-and-window
       )
