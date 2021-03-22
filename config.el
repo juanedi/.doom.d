@@ -146,8 +146,14 @@
 ;; Misc
 ;; -----------------------------------------------
 
-;; use regular posframe errors for lsp instead of the custom sideline
-(setq lsp-ui-sideline-enable nil)
+(setq
+  indicate-empty-lines nil
+
+  ;; use regular posframe errors for lsp instead of the custom sideline
+  lsp-ui-sideline-enable nil
+
+  ruby-insert-encoding-magic-comment nil
+  )
 
 (use-package! which-key
   :config
