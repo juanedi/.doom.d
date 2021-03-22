@@ -54,3 +54,5 @@
 (package! centered-cursor-mode)
 
 (package! flycheck-posframe)
+
+(package! lorem-ipsum)

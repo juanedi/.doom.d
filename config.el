@@ -172,6 +172,12 @@
        :desc "Highlight symbol under point"  "h" (lambda () (interactive) (evil-ex-start-word-search nil 'forward 0 t))
        )
 
+      (:prefix ("i l" . "lorem ipsum")
+       :desc "Insert paragraph" "l" #'lorem-ipsum-insert-list
+       :desc "Insert paragraph" "p" #'lorem-ipsum-insert-paragraphs
+       :desc "Insert paragraph" "s" #'lorem-ipsum-insert-sentences
+       )
+
       "TAB" #'evil-switch-to-windows-last-buffer
 
       "c y" #'evilnc-copy-and-comment-lines
