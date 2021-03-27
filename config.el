@@ -153,6 +153,9 @@
   lsp-ui-sideline-enable nil
 
   ruby-insert-encoding-magic-comment nil
+
+  ;; tune initial frame size
+  initial-frame-alist '((width . 80) (height . 30))
   )
 
 (use-package! which-key
