@@ -162,6 +162,12 @@
   :config
   (setq which-key-idle-delay 0.5))
 
+(use-package! counsel-projectile
+  :config
+  (counsel-projectile-modify-action
+    'counsel-projectile-switch-project-action
+    '((default counsel-projectile-switch-project-action-vc))))
+
 (map!
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
