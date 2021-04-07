@@ -56,3 +56,5 @@
 (package! flycheck-posframe)
 
 (package! lorem-ipsum)
+
+(package! reformatter)

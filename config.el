@@ -168,6 +168,19 @@
     'counsel-projectile-switch-project-action
     '((default counsel-projectile-switch-project-action-vc))))
 
+; formatters!
+(use-package! reformatter
+  :config
+  (reformatter-define prettier-format
+    :program "prettier"
+    :args
+    (cond
+     (buffer-file-name (list "--stdin-filepath" buffer-file-name))
+     ((eq major-mode 'js2-mode) (list "--parser" "babel")))))
+
+; the javascript module adds node_modules/.bin to execpath by default. i don't like that.
+(remove-hook '+javascript-npm-mode-hook 'add-node-modules-path)
+
 (map!
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
