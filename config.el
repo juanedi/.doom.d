@@ -158,6 +158,12 @@
   initial-frame-alist '((width . 80) (height . 30))
   )
 
+(use-package! treemacs
+  :config
+  (setq treemacs-width 30
+        doom-themes-treemacs-enable-variable-pitch nil)
+  (add-hook! treemacs-mode (text-scale-adjust -1)))
+
 (use-package! which-key
   :config
   (setq which-key-idle-delay 0.5))
@@ -199,6 +205,11 @@
        :desc "Insert paragraph" "p" #'lorem-ipsum-insert-paragraphs
        :desc "Insert paragraph" "s" #'lorem-ipsum-insert-sentences
        )
+
+      ; same as default, but also switch focus to the sidebar
+      :desc "Find file in project sidebar" "o P" (lambda () (interactive) (treemacs-find-file) (treemacs-select-window))
+
+      "SPC" #'counsel-M-x
 
       "TAB" #'evil-switch-to-windows-last-buffer
 
