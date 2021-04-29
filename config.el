@@ -124,10 +124,11 @@
   flycheck-posframe-position 'frame-bottom-right-corner
   )
 
-(set-face-attribute 'flycheck-posframe-face         nil :foreground "#FFFFFF" :height 0.9)
-(set-face-attribute 'flycheck-posframe-info-face    nil :foreground "#FFFFFF" :height 0.9)
-(set-face-attribute 'flycheck-posframe-warning-face nil :foreground "#FFFFFF" :height 0.9)
-(set-face-attribute 'flycheck-posframe-error-face   nil :foreground "#FFFFFF" :height 0.9)
+(flycheck-posframe-configure-pretty-defaults)
+(set-face-attribute 'flycheck-posframe-face         nil :height 0.9)
+(set-face-attribute 'flycheck-posframe-info-face    nil :height 0.9)
+(set-face-attribute 'flycheck-posframe-warning-face nil :height 0.9)
+(set-face-attribute 'flycheck-posframe-error-face   nil :height 0.9)
 
 (global-centered-cursor-mode)
 
