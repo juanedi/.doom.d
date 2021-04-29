@@ -178,6 +178,9 @@
 ; formatters!
 (use-package! reformatter
   :config
+  (reformatter-define fourmolu
+    :program "fourmolu")
+
   (reformatter-define prettier-format
     :program "prettier"
     :args
