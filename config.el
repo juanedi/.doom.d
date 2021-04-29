@@ -191,6 +191,13 @@
 ; the javascript module adds node_modules/.bin to execpath by default. i don't like that.
 (remove-hook '+javascript-npm-mode-hook 'add-node-modules-path)
 
+
+(defun misc/close-compilation-window ()
+  "Close the window containing the '*compilation*' buffer."
+  (interactive)
+  (when compilation-last-buffer
+    (delete-windows-on compilation-last-buffer)))
+
 (map!
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
@@ -217,6 +224,7 @@
 
       "TAB" #'evil-switch-to-windows-last-buffer
 
+      "c q" #'misc/close-compilation-window
       "c y" #'evilnc-copy-and-comment-lines
 
       "i k" #'+evil/insert-newline-above
