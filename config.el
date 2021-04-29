@@ -191,12 +191,32 @@
 ; the javascript module adds node_modules/.bin to execpath by default. i don't like that.
 (remove-hook '+javascript-npm-mode-hook 'add-node-modules-path)
 
-
+; stolen from spacemacs :-)
 (defun misc/close-compilation-window ()
   "Close the window containing the '*compilation*' buffer."
   (interactive)
   (when compilation-last-buffer
     (delete-windows-on compilation-last-buffer)))
+
+; stolen from spacemacs :-)
+(defun misc/window-layout-toggle ()
+  "Toggle between horizontal and vertical layout of two windows."
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((window-tree (car (window-tree)))
+             (current-split-vertical-p (car window-tree))
+             (first-window (nth 2 window-tree))
+             (second-window (nth 3 window-tree))
+             (second-window-state (window-state-get second-window))
+             (splitter (if current-split-vertical-p
+                           #'split-window-horizontally
+                         #'split-window-vertically)))
+        (delete-other-windows first-window)
+        ;; `window-state-put' also re-selects the window if needed, so we don't
+        ;; need to call `select-window'
+        (window-state-put second-window-state (funcall splitter)))
+    (error "Can't toggle window layout when the number of windows isn't two.")))
+
 
 (map!
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
@@ -230,6 +250,7 @@
       "i k" #'+evil/insert-newline-above
       "i j" #'+evil/insert-newline-below
 
+      "w +" #'misc/window-layout-toggle
       "w v" #'+evil/window-vsplit-and-follow
       "w s" #'+evil/window-split-and-follow
 
