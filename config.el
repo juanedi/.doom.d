@@ -157,7 +157,8 @@
 
   ;; tune initial frame size
   initial-frame-alist '((width . 80) (height . 30))
-  )
+
+  git-link-use-single-line-number nil)
 
 (use-package! treemacs
   :config
