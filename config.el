@@ -226,6 +226,11 @@
   )
 
 (map! :leader
+      (:prefix ("g l" . "list/link")
+       :desc "Copy Github link"              "l" #'git-link
+       :desc "Open Github link in browser"   "o" (lambda () (interactive) (let ((git-link-open-in-browser t)) (call-interactively 'git-link)))
+       )
+
       (:prefix ("s" . "search/symbol")
        :desc "Reset highlight"               "c" #'evil-ex-nohighlight
        :desc "Highlight symbol under point"  "h" (lambda () (interactive) (evil-ex-start-word-search nil 'forward 0 t))

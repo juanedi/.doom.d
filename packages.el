@@ -58,3 +58,5 @@
 (package! lorem-ipsum)
 
 (package! reformatter)
+
+(package! git-link)
