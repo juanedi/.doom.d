@@ -222,8 +222,7 @@
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
   :n "C-L" #'evil-end-of-line
-  :n "C-SPC" #'ivy-switch-buffer
-  )
+  :n "C-SPC" #'ivy-switch-buffer)
 
 (map! :leader
       (:prefix ("g l" . "list/link")
@@ -254,6 +253,11 @@
 
       "i k" #'+evil/insert-newline-above
       "i j" #'+evil/insert-newline-below
+
+      ; skip doom's wrapper (+ivy/projectile-find-file) which uses the incorrect
+      ; cwd to build the target file when opening target in another window via
+      ; C-o j (will use the current directory instead of the project root)
+      "p f" #'counsel-projectile-find-file
 
       "w +" #'misc/window-layout-toggle
       "w v" #'+evil/window-vsplit-and-follow
