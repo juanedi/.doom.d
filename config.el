@@ -112,6 +112,41 @@
         )))
 
 ;; -----------------------------------------------
+;; Idris
+;; -----------------------------------------------
+
+(setq idris-interpreter-path "idris2"
+      idris-stay-in-current-window-on-compiler-error t
+      idris-show-help-text nil)
+
+(defun load-idris-file-hook ()
+  (when (and buffer-file-name
+             (eq major-mode 'idris-mode))
+    (idris-load-file)))
+
+(add-hook 'after-save-hook #'load-idris-file-hook)
+(add-hook 'idris-mode-hook #'load-idris-file-hook)
+
+(add-hook! idris-info-mode (text-scale-adjust -1))
+(add-hook! idris-hole-list-mode (text-scale-adjust -1))
+
+(use-package! idris-settings
+ :config
+ (require 'tree-sitter)
+ (put 'idris-semantic-type-face 'face-alias 'tree-sitter-hl-face:type)
+ (put 'idris-semantic-data-face 'face-alias 'tree-sitter-hl-face:constructor)
+ (put 'idris-semantic-function-face 'face-alias 'tree-sitter-hl-face:function)
+ (put 'idris-semantic-bound-face 'face-alias 'tree-sitter-hl-face:variable.parameter))
+
+(set-popup-rule!
+  "^\\**idris-.*\\*"
+  :side 'bottom
+  :slot 1
+  :quit t
+  :select nil
+  :size #'+popup-shrink-to-fit)
+
+;; -----------------------------------------------
 ;; Flycheck
 ;; -----------------------------------------------
 (flycheck-posframe-configure-pretty-defaults)
