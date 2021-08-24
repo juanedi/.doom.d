@@ -219,6 +219,9 @@
 ; formatters!
 (use-package! reformatter
   :config
+  (reformatter-define ormolu
+    :program "ormolu")
+
   (reformatter-define fourmolu
     :program "fourmolu")
 
