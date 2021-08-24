@@ -307,3 +307,5 @@
   (require 'tree-sitter-langs)
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(remove-hook! 'doom-modeline-mode-hook #'size-indication-mode)
