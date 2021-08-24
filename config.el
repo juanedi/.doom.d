@@ -146,6 +146,11 @@
   :select nil
   :size #'+popup-shrink-to-fit)
 
+
+(map! :map idris-mode-map
+      (:leader
+       "m C" #'idris-make-cases-from-hole
+       "m T" #'idris-type-at-point))
 ;; -----------------------------------------------
 ;; Flycheck
 ;; -----------------------------------------------
