@@ -188,6 +188,8 @@
 ;; -----------------------------------------------
 
 (setq
+  enable-local-variables t
+
   indicate-empty-lines nil
 
   ;; use regular posframe errors for lsp instead of the custom sideline
