@@ -182,6 +182,25 @@
 
 ;; make sure envrc is loaded before detecting available checkers
 (add-hook 'flycheck-before-syntax-check-hook #'+direnv-init-h)
+;; -----------------------------------------------
+;; Formatters
+;; -----------------------------------------------
+
+(use-package! reformatter
+  :config
+  (reformatter-define ormolu
+    :program "ormolu")
+
+  (reformatter-define fourmolu
+    :program "fourmolu")
+
+  (reformatter-define prettier-format
+    :program "prettier"
+    :args
+    (cond
+     (buffer-file-name (list "--stdin-filepath" buffer-file-name))
+     ((eq major-mode 'js2-mode) (list "--parser" "babel")))))
+
 
 ;; -----------------------------------------------
 ;; Misc
@@ -220,22 +239,6 @@
   (counsel-projectile-modify-action
     'counsel-projectile-switch-project-action
     '((default counsel-projectile-switch-project-action-vc))))
-
-; formatters!
-(use-package! reformatter
-  :config
-  (reformatter-define ormolu
-    :program "ormolu")
-
-  (reformatter-define fourmolu
-    :program "fourmolu")
-
-  (reformatter-define prettier-format
-    :program "prettier"
-    :args
-    (cond
-     (buffer-file-name (list "--stdin-filepath" buffer-file-name))
-     ((eq major-mode 'js2-mode) (list "--parser" "babel")))))
 
 ; the javascript module adds node_modules/.bin to execpath by default. i don't like that.
 (remove-hook '+javascript-npm-mode-hook 'add-node-modules-path)
