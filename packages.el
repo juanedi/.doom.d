@@ -62,3 +62,5 @@
 (package! git-link)
 (package! tree-sitter)
 (package! tree-sitter-langs)
+
+(package! evil-matchit)

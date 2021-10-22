@@ -323,3 +323,7 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (remove-hook! 'doom-modeline-mode-hook #'size-indication-mode)
+
+(use-package! evil-matchit
+  :config
+  (add-hook! 'ruby-mode-hook #'evil-matchit-mode))
