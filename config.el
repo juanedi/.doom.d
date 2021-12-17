@@ -209,6 +209,9 @@
 
   indicate-empty-lines nil
 
+  ;; disable tooltip with docs on hover
+  lsp-ui-doc-enable nil
+
   ;; use regular posframe errors for lsp instead of the custom sideline
   lsp-ui-sideline-enable nil
 
