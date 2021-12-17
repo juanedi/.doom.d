@@ -219,7 +219,9 @@
 
   git-link-use-single-line-number nil
 
-  ivy-count-format "")
+  ivy-count-format ""
+
+  doom-font-increment 1)
 
 (use-package! treemacs
   :config
