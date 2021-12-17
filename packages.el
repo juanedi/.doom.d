@@ -64,3 +64,5 @@
 (package! tree-sitter-langs)
 
 (package! evil-matchit)
+
+(package! dhall-mode)

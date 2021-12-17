@@ -326,3 +326,7 @@
 (use-package! evil-matchit
   :config
   (add-hook! 'ruby-mode-hook #'evil-matchit-mode))
+
+(use-package! dhall-mode
+  :ensure t
+  :mode "\\.dhall\\'")
