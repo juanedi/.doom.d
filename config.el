@@ -204,7 +204,7 @@
 ;; Theme Customizations
 ;; -----------------------------------------------
 
-(custom-theme-set-faces! 'doom-monokai-pro
+(custom-theme-set-faces! 'doom-ayu-mirage
   '(evil-ex-lazy-highlight :background "#6b696b" :foreground "#FCFCFA" :distant-foreground "#19181A"))
 
 ;; -----------------------------------------------
