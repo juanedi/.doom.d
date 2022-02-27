@@ -151,6 +151,7 @@
       (:leader
        "m C" #'idris-make-cases-from-hole
        "m T" #'idris-type-at-point))
+
 ;; -----------------------------------------------
 ;; Flycheck
 ;; -----------------------------------------------
@@ -199,6 +200,12 @@
      (buffer-file-name (list "--stdin-filepath" buffer-file-name))
      ((eq major-mode 'js2-mode) (list "--parser" "babel")))))
 
+;; -----------------------------------------------
+;; Theme Customizations
+;; -----------------------------------------------
+
+(custom-theme-set-faces! 'doom-monokai-pro
+  '(evil-ex-lazy-highlight :background "#6b696b" :foreground "#FCFCFA" :distant-foreground "#19181A"))
 
 ;; -----------------------------------------------
 ;; Misc
