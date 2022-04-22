@@ -235,6 +235,8 @@
   ;; disable tooltip with docs on hover
   lsp-ui-doc-enable nil
 
+  lsp-lens-enable nil
+
   ;; use regular posframe errors for lsp instead of the custom sideline
   lsp-ui-sideline-enable nil
 
