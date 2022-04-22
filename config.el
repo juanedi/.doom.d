@@ -27,11 +27,17 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (let*
-    ((my-themes '(doom-city-lights
+    ((my-themes '(; dark themes
+                  doom-city-lights
                   doom-ayu-mirage
                   doom-monokai-pro
                   doom-nord
-                  doom-nord-light))
+                  sanityinc-tomorrow-night
+
+                  ; light themes
+                  doom-nord-light
+                  sanityinc-tomorrow-day
+                  ))
      (random-theme (nth (random (length my-themes)) my-themes)))
   (setq doom-theme random-theme))
 

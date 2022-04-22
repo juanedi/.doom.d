@@ -66,3 +66,5 @@
 (package! evil-matchit)
 
 (package! dhall-mode)
+
+(package! color-theme-sanityinc-tomorrow)
