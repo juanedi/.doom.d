@@ -296,7 +296,6 @@
         (window-state-put second-window-state (funcall splitter)))
     (error "Can't toggle window layout when the number of windows isn't two.")))
 
-
 (map!
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
@@ -372,3 +371,7 @@
   "7" #'winum-select-window-7
   "8" #'winum-select-window-8
   "9" #'winum-select-window-9)
+
+(let ((local-config-file "~/config.local.el"))
+  (when (file-exists-p local-config-file)
+    (load-file local-config-file)))
