@@ -212,7 +212,16 @@
 ;; -----------------------------------------------
 
 (custom-theme-set-faces! 'doom-ayu-mirage
-  '(evil-ex-lazy-highlight :background "#6b696b" :foreground "#FCFCFA" :distant-foreground "#19181A"))
+  '(evil-ex-lazy-highlight :background "#6b696b" :foreground "#FCFCFA" :distant-foreground "#19181A")
+
+  ;; yellow bar in the active buffer; invisible in inactive ones
+  '(doom-modeline-bar :background "#ffcc66")
+  '(doom-modeline-bar-inactive :background "#141820")
+
+  ;; make the current line number stand out more
+  '(line-number              :foreground "#484f5b" :height 0.9)
+  '(line-number-current-line :foreground "#f5f7fd" :height 0.9)
+  )
 
 ;; -----------------------------------------------
 ;; Misc
