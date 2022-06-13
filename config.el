@@ -206,6 +206,9 @@
   (reformatter-define fourmolu
     :program "fourmolu")
 
+  (reformatter-define nixfmt
+    :program "nixfmt")
+
   (reformatter-define prettier-format
     :program "prettier"
     :args
