@@ -178,7 +178,6 @@
   flycheck-posframe-position 'frame-bottom-right-corner
   )
 
-;; (flycheck-posframe-configure-pretty-defaults)
 (set-face-attribute 'flycheck-posframe-face         nil :height 0.8)
 (set-face-attribute 'flycheck-posframe-info-face    nil :height 0.8)
 (set-face-attribute 'flycheck-posframe-warning-face nil :height 0.8)
@@ -229,8 +228,7 @@
 
   ;; make the current line number stand out more
   '(line-number              :foreground "#484f5b" :height 0.9)
-  '(line-number-current-line :foreground "#f5f7fd" :height 0.9)
-  )
+  '(line-number-current-line :foreground "#f5f7fd" :height 0.9))
 
 ;; -----------------------------------------------
 ;; Misc
@@ -380,6 +378,15 @@
   "7" #'winum-select-window-7
   "8" #'winum-select-window-8
   "9" #'winum-select-window-9)
+
+(use-package! ivy-posframe
+  :config
+  (setq
+    ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center))
+    ivy-posframe-border-width 3
+    ivy-posframe-parameters
+        '((left-fringe . 10)
+          (right-fringe . 10))))
 
 (let ((local-config-file "~/config.local.el"))
   (when (file-exists-p local-config-file)
