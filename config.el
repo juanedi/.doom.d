@@ -381,8 +381,9 @@
 
 (use-package! ivy-posframe
   :config
+  (setf (alist-get t ivy-posframe-display-functions-alist)
+      #'ivy-posframe-display-at-frame-center)
   (setq
-    ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center))
     ivy-posframe-border-width 3
     ivy-posframe-parameters
         '((left-fringe . 10)
