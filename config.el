@@ -28,14 +28,13 @@
 ;; `load-theme' function. This is the default:
 (let*
     ((my-themes '(; dark themes
-                  doom-city-lights
                   doom-ayu-mirage
-                  doom-monokai-pro
+                  doom-city-lights
                   doom-nord
                   sanityinc-tomorrow-night
 
                   ; light themes
-                  doom-nord-light
+                  doom-ayu-light
                   sanityinc-tomorrow-day
                   ))
      (random-theme (nth (random (length my-themes)) my-themes)))
