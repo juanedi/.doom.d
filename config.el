@@ -124,6 +124,22 @@
         )))
 
 ;; -----------------------------------------------
+;; Ruby
+;; -----------------------------------------------
+
+(defun ruby/rspec-outline ()
+  "Display an outline of specs in the current buffer without actually running them."
+  (interactive)
+  (rspec--autosave-buffer-maybe)
+  (rspec-run-single-file (rspec-spec-file-for (buffer-file-name))
+                         "--colour --dry-run --format doc"))
+
+(map! :map rspec-mode-map
+      (:leader
+       (:prefix ("m t" . "tests")
+        :desc "Display an outline of the speec" "o"   #'ruby/rspec-outline
+        )))
+;; -----------------------------------------------
 ;; Idris
 ;; -----------------------------------------------
 
