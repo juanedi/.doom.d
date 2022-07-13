@@ -242,8 +242,8 @@
   '(doom-modeline-bar-inactive :background "#141820")
 
   ;; make the current line number stand out more
-  '(line-number              :foreground "#484f5b" :height 0.9)
-  '(line-number-current-line :foreground "#f5f7fd" :height 0.9))
+  '(line-number              :foreground "#484f5b")
+  '(line-number-current-line :foreground "#f5f7fd"))
 
 ;; -----------------------------------------------
 ;; Misc
