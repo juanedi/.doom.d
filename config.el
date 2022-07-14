@@ -23,23 +23,6 @@
       ;; doom-variable-pitch-font (font-spec :family "sans" :size 13))
 (setq doom-font (font-spec :family "FuraMono Nerd Font" :size 14))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(let*
-    ((my-themes '(; dark themes
-                  doom-ayu-mirage
-                  doom-city-lights
-                  doom-nord
-                  sanityinc-tomorrow-night
-
-                  ; light themes
-                  doom-ayu-light
-                  sanityinc-tomorrow-day
-                  ))
-     (random-theme (nth (random (length my-themes)) my-themes)))
-  (setq doom-theme random-theme))
-
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
@@ -65,6 +48,49 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+;; -----------------------------------------------
+;; Themes
+;; -----------------------------------------------
+
+;; There are two ways to load a theme. Both assume the theme is installed and
+;; available. You can either set `doom-theme' or manually load a theme with the
+;; `load-theme' function. This is the default:
+(setq jedi/themes '(doom-ayu-mirage
+                    doom-ayu-light
+                    doom-city-lights
+                    doom-nord)
+
+      randomize-theme nil
+
+      doom-theme (if randomize-theme (nth (random (length jedi/themes)) jedi/themes) (car jedi/themes)))
+
+(defun jedi/cycle-theme ()
+  (interactive)
+  (let ((next-theme
+         (or (car (cdr (member doom-theme jedi/themes)))
+             (car jedi/themes))))
+    (progn
+        (message "%s" next-theme)
+        (load-theme next-theme t)
+        (setq doom-theme next-theme))))
+
+(map! :leader
+      (:prefix ("T" . "themes")
+        "T" #'jedi/cycle-theme
+        "l" #'load-theme))
+
+(custom-theme-set-faces! 'doom-ayu-mirage
+  '(evil-ex-lazy-highlight :background "#6b696b" :foreground "#FCFCFA" :distant-foreground "#19181A")
+
+  ;; yellow bar in the active buffer; invisible in inactive ones
+  '(doom-modeline-bar :background "#ffcc66")
+  '(doom-modeline-bar-inactive :background "#141820")
+
+  ;; make the current line number stand out more
+  '(line-number              :foreground "#484f5b")
+  '(line-number-current-line :foreground "#f5f7fd"))
 
 ;; -----------------------------------------------
 ;; Elm
@@ -229,21 +255,6 @@
     (cond
      (buffer-file-name (list "--stdin-filepath" buffer-file-name))
      ((eq major-mode 'js2-mode) (list "--parser" "babel")))))
-
-;; -----------------------------------------------
-;; Theme Customizations
-;; -----------------------------------------------
-
-(custom-theme-set-faces! 'doom-ayu-mirage
-  '(evil-ex-lazy-highlight :background "#6b696b" :foreground "#FCFCFA" :distant-foreground "#19181A")
-
-  ;; yellow bar in the active buffer; invisible in inactive ones
-  '(doom-modeline-bar :background "#ffcc66")
-  '(doom-modeline-bar-inactive :background "#141820")
-
-  ;; make the current line number stand out more
-  '(line-number              :foreground "#484f5b")
-  '(line-number-current-line :foreground "#f5f7fd"))
 
 ;; -----------------------------------------------
 ;; Misc
