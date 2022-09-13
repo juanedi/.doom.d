@@ -338,7 +338,8 @@
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
   :n "C-L" #'evil-end-of-line
-  :n "C-SPC" #'ivy-switch-buffer)
+  :n "C-SPC" #'ivy-switch-buffer
+  :n "C-=" #'er/expand-region)
 
 (map! :leader
       (:prefix ("g l" . "list/link")
