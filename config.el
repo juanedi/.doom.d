@@ -159,7 +159,7 @@
   (interactive)
   (rspec--autosave-buffer-maybe)
   (rspec-run-single-file (rspec-spec-file-for (buffer-file-name))
-                         "--colour --dry-run --format doc"))
+                         "--colour --dry-run --format doc --order defined"))
 
 (map! :map rspec-mode-map
       (:leader
