@@ -139,16 +139,16 @@
         (concat module-name " as " (car (last components)))
         (concat module-name))))
 
-(map! :map elm-mode-map
-      (:leader
-       (:prefix ("m i" . "import")
-        :desc "Add import"              "i"   #'elm/import
-        :desc "Add import from file"    "f"   #'elm/import-from-file)
-       (:prefix ("m t" . "tests")
-        :desc "Run tests in buffer"                    "b"   #'elm-test-runner-run
-        :desc "Re-run last test"                       "r"   #'elm-test-runner-rerun
-        :desc "Toggle between test and implementation" "TAB" #'elm-test-runner-toggle-test-and-target
-        )))
+(map! :localleader
+      :map elm-mode-map
+      (:prefix ("i" . "import")
+       :desc "Add import"              "i"   #'elm/import
+       :desc "Add import from file"    "f"   #'elm/import-from-file)
+      (:prefix ("t" . "tests")
+       :desc "Run tests in buffer"                    "v"   #'elm-test-runner-run
+       :desc "Re-run last test"                       "r"   #'elm-test-runner-rerun
+       :desc "Toggle between test and implementation" "TAB" #'elm-test-runner-toggle-test-and-target
+       ))
 
 ;; -----------------------------------------------
 ;; Ruby
@@ -161,11 +161,20 @@
   (rspec-run-single-file (rspec-spec-file-for (buffer-file-name))
                          "--colour --dry-run --format doc --order defined"))
 
-(map! :map rspec-mode-map
-      (:leader
-       (:prefix ("m t" . "tests")
-        :desc "Display an outline of the speec" "o"   #'ruby/rspec-outline
-        )))
+(defun rubocop-autocorrect-all-current-file ()
+  "Run autocorrect on current file."
+  (interactive)
+  (rubocop--file-command "rubocop -A --format emacs"))
+
+(map! :localleader
+      :map ruby-mode-map
+      "F" #'rubocop-autocorrect-all-current-file
+      )
+
+(map! :localleader
+      :map rspec-mode-map
+      :desc "Display an outline of the speec" "t o"   #'ruby/rspec-outline)
+
 ;; -----------------------------------------------
 ;; Idris
 ;; -----------------------------------------------
@@ -210,6 +219,23 @@
 ;; -----------------------------------------------
 ;; Flycheck
 ;; -----------------------------------------------
+(defvar-local misc/flycheck-local-cache nil)
+
+;; allow mode-dependand checker chains
+;; see https://github.com/flycheck/flycheck/issues/1762
+(defun misc/flycheck-checker-get (fn checker property)
+  (or (alist-get property (alist-get checker misc/flycheck-local-cache))
+      (funcall fn checker property)))
+
+(advice-add 'flycheck-checker-get :around 'misc/flycheck-checker-get)
+
+;; configure rubocop to run right after lsp in ruby-mode
+;; (add-hook 'lsp-managed-mode-hook
+;;           (lambda ()
+;;             (when (derived-mode-p 'ruby-mode)
+;;               (setq misc/flycheck-local-cache '((lsp . ((next-checkers . (ruby-rubocop)))))))
+;;             ))
+
 (flycheck-posframe-configure-pretty-defaults)
 (setq
   flycheck-highlighting-mode 'lines
@@ -261,6 +287,8 @@
 ;; -----------------------------------------------
 
 (setq
+  mac-frame-tabbing nil
+
   enable-local-variables t
 
   indicate-empty-lines nil
