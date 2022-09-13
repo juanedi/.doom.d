@@ -60,6 +60,7 @@
 (setq jedi/themes '(doom-ayu-mirage
                     doom-ayu-light
                     doom-city-lights
+                    doom-vibrant
                     doom-nord)
 
       randomize-theme nil
