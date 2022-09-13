@@ -283,7 +283,11 @@
 
   ivy-count-format ""
 
-  doom-font-increment 1)
+  doom-font-increment 1
+
+  ;; use encrypted token store for forge
+  auth-sources '("~/.authinfo.gpg")
+  )
 
 (use-package! treemacs
   :config
