@@ -238,7 +238,6 @@
 ;; -----------------------------------------------
 ;; Formatters
 ;; -----------------------------------------------
-
 (use-package! reformatter
   :config
   (reformatter-define ormolu
@@ -279,7 +278,8 @@
   ;; tune initial frame size
   initial-frame-alist '((width . 80) (height . 30))
 
-  git-link-use-single-line-number nil
+  git-link-use-commit t
+  git-link-use-single-line-number t
 
   ivy-count-format ""
 
