@@ -242,6 +242,19 @@
      ((eq major-mode 'js2-mode) (list "--parser" "babel")))))
 
 ;; -----------------------------------------------
+;; LSP
+;; -----------------------------------------------
+
+(setq
+  ;; disable tooltip with docs on hover
+  lsp-ui-doc-enable nil
+
+  lsp-lens-enable nil
+
+  ;; use regular posframe errors for lsp instead of the custom sideline
+  lsp-ui-sideline-enable nil)
+
+;; -----------------------------------------------
 ;; Misc
 ;; -----------------------------------------------
 
@@ -251,14 +264,6 @@
   enable-local-variables t
 
   indicate-empty-lines nil
-
-  ;; disable tooltip with docs on hover
-  lsp-ui-doc-enable nil
-
-  lsp-lens-enable nil
-
-  ;; use regular posframe errors for lsp instead of the custom sideline
-  lsp-ui-sideline-enable nil
 
   ruby-insert-encoding-magic-comment nil
 
