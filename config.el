@@ -245,6 +245,31 @@
 ;; LSP
 ;; -----------------------------------------------
 
+(use-package! lsp-mode
+  :config
+
+  ;; Doom has some custom code for logging the project root after initializing
+  ;; LSP that works well in general, but is problematic when the project root
+  ;; can't be guessed automatically and requires prompting the user to select
+  ;; it.
+  ;; Specifically:
+  ;;   - lsp mode calls `lsp--calculate-root' (indirectly)
+  ;;   - `lsp--calculate-root' asks the user to interactively select the root
+  ;;   - doom's hook calls `lsp--calculate-root' again to know which root to log (assuming it's a pure function)
+  ;;   - ... which means the user gets asked twice!
+  ;;
+  ;;  Workaround is to remove doom's hook and reinstate the logging using advice
+  ;;  instead.
+  (remove-hook! 'lsp-mode-hook '+lsp-display-guessed-project-root-h)
+  (defadvice! +lsp-display-guessed-project-root (root)
+    "Log what LSP things is the root of the current project."
+    ;; Makes it easier to detect root resolution issues.
+    :filter-return #'lsp--calculate-root
+    (if root
+        (lsp--info "Guessed project root is %s" (abbreviate-file-name root))
+      (lsp--info "Could not guess project root."))
+    root))
+
 (setq
   ;; disable tooltip with docs on hover
   lsp-ui-doc-enable nil
