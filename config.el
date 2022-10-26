@@ -388,6 +388,8 @@
       "i k" #'+evil/insert-newline-above
       "i j" #'+evil/insert-newline-below
 
+      "j j" #'avy-goto-char-2
+
       ; skip doom's wrapper (+ivy/projectile-find-file) which uses the incorrect
       ; cwd to build the target file when opening target in another window via
       ; C-o j (will use the current directory instead of the project root)
