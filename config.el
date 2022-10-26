@@ -322,6 +322,11 @@
     'counsel-projectile-switch-project-action
     '((default counsel-projectile-switch-project-action-vc))))
 
+; restore keybindings that magit overrides in blob mode
+(map! :map magit-blob-mode-map
+      :n "n" #'evil-ex-search-next
+      :n "N" #'evil-ex-search-previous)
+
 ; the javascript module adds node_modules/.bin to execpath by default. i don't like that.
 (remove-hook '+javascript-npm-mode-hook 'add-node-modules-path)
 
