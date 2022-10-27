@@ -175,6 +175,10 @@
       :map rspec-mode-map
       :desc "Display an outline of the speec" "t o"   #'ruby/rspec-outline)
 
+(use-package! evil-matchit
+  :config
+  (add-hook! 'ruby-mode-hook #'evil-matchit-mode))
+
 ;; -----------------------------------------------
 ;; Flycheck
 ;; -----------------------------------------------
@@ -403,7 +407,6 @@
       "w +" #'misc/window-layout-toggle
       "w v" #'+evil/window-vsplit-and-follow
       "w s" #'+evil/window-split-and-follow
-
       "w x" #'kill-buffer-and-window
 
       "0" #'winum-select-window-0-or-10
@@ -424,10 +427,6 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (remove-hook! 'doom-modeline-mode-hook #'size-indication-mode)
-
-(use-package! evil-matchit
-  :config
-  (add-hook! 'ruby-mode-hook #'evil-matchit-mode))
 
 (use-package! dhall-mode
   :ensure t
