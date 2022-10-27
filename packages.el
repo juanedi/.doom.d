@@ -48,23 +48,14 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
-
-(package! elm-test-runner)
-
 (package! centered-cursor-mode)
-
+(package! color-theme-sanityinc-tomorrow)
+(package! dhall-mode)
+(package! elm-test-runner)
+(package! evil-matchit)
 (package! flycheck-posframe)
-
-(package! lorem-ipsum)
-
-(package! reformatter)
-
 (package! git-link)
+(package! lorem-ipsum)
+(package! reformatter)
 (package! tree-sitter)
 (package! tree-sitter-langs)
-
-(package! evil-matchit)
-
-(package! dhall-mode)
-
-(package! color-theme-sanityinc-tomorrow)
