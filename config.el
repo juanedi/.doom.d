@@ -114,7 +114,8 @@
     (elm-sort-imports)))
 
 (defun elm/import-from-file ()
-  "Selects an elm file interactively and adds an import for the corresponding module"
+  "Selects an elm file interactively and adds an import for the
+corresponding module"
   (interactive)
   (let*
       ((all-files (projectile-current-project-files))
@@ -383,19 +384,6 @@
 ;; mode (which are OK to keep with the rest of the mode's config).
 ;; ----------------------------------------------------------------------------
 
-(map! :leader
-      (:prefix ("T" . "themes")
-        "T" #'jedi/cycle-theme
-        "l" #'load-theme))
-
-(map! :leader
-      (:prefix ("e" . "compilation errors")
-       :desc "Go to first error"     "f" #'flycheck-first-error
-       :desc "Go to next error"      "n" #'flycheck-next-error
-       :desc "Go to previous error"  "p" #'flycheck-previous-error
-       :desc "Recompile buffer"      "r" #'flycheck-buffer
-       ))
-
 (map!
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
@@ -404,21 +392,28 @@
   :n "C-=" #'er/expand-region)
 
 (map! :leader
+      (:prefix ("e" . "compilation errors")
+       :desc "Go to first error"     "f" #'flycheck-first-error
+       :desc "Go to next error"      "n" #'flycheck-next-error
+       :desc "Go to previous error"  "p" #'flycheck-previous-error
+       :desc "Recompile buffer"      "r" #'flycheck-buffer)
+
       (:prefix ("g l" . "list/link")
        :desc "Copy Github link"              "l" #'git-link
-       :desc "Open Github link in browser"   "o" (lambda () (interactive) (let ((git-link-open-in-browser t)) (call-interactively 'git-link)))
-       )
+       :desc "Open Github link in browser"   "o" (lambda () (interactive) (let ((git-link-open-in-browser t)) (call-interactively 'git-link))))
 
       (:prefix ("s" . "search/symbol")
        :desc "Reset highlight"               "c" #'evil-ex-nohighlight
-       :desc "Highlight symbol under point"  "h" (lambda () (interactive) (evil-ex-start-word-search nil 'forward 0 t))
-       )
+       :desc "Highlight symbol under point"  "h" (lambda () (interactive) (evil-ex-start-word-search nil 'forward 0 t)))
 
       (:prefix ("i l" . "lorem ipsum")
        :desc "Insert paragraph" "l" #'lorem-ipsum-insert-list
        :desc "Insert paragraph" "p" #'lorem-ipsum-insert-paragraphs
-       :desc "Insert paragraph" "s" #'lorem-ipsum-insert-sentences
-       )
+       :desc "Insert paragraph" "s" #'lorem-ipsum-insert-sentences)
+
+      (:prefix ("T" . "themes")
+        "T" #'jedi/cycle-theme
+        "l" #'load-theme)
 
       ; same as default, but also switch focus to the sidebar
       :desc "Find file in project sidebar" "o P" (lambda () (interactive) (treemacs-find-file) (treemacs-select-window))
