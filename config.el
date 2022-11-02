@@ -299,6 +299,22 @@ corresponding module"
          (apply 'concat (butlast (-interleave chars joiners))))
      (ivy--regex-plus str))))
 
+(defun jedi/split-string-keeping-separators (string regex)
+  "TODO: docs"
+  (let ((i 0)
+        (len (length string))
+        (list nil))
+    (while (and (< i len)
+                (string-match regex string i))
+      (if (< i (match-beginning 0))
+          (push (substring string i (match-beginning 0)) list))
+      (push (substring string (match-beginning 0) (match-end 0)) list)
+      (setq i (match-end 0)))
+
+    (if (< i len)
+        (push (substring string i len) list))
+    (nreverse list)))
+
 ;; ----------------------------------------------------------------------------
 ;; Misc
 ;; ----------------------------------------------------------------------------
