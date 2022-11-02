@@ -337,9 +337,9 @@ As an example, this means that \"PLHMain\" will match \"Page/Learn/Home/Main.elm
          ; segments untouched.
          ; e.g.: ("PLHM" "ain") -> ("P.*\\bL.*\\bH.*\\bM" "ain")
          (transformed-parts (seq-map fun parts))
-         ; joins the transformed segments with spaces to build a new query
-         ; e.g.: ("P.*\\bL.*\\bH.*\\bM" "ain") -> "P.*\\bL.*\\bH.*\\bM ain"
-         (query (string-join transformed-parts ".*")))
+         ; joins the transformed segments to build a new query
+         ; e.g.: ("P.*\\bL.*\\bH.*\\bM" "ain") -> "P.*\\bL.*\\bH.*\\bMain"
+         (query (string-join transformed-parts "")))
     ; after pre-processing the query, call `ivy--regex-ignore-order' which
     ; basically:
     ;   - splits the input at whitespaces to get a list of subqueries
