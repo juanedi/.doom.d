@@ -287,21 +287,30 @@ corresponding module"
         '((left-fringe . 10)
           (right-fringe . 10))))
 
-(ivy--alist-set
- 'ivy-re-builders-alist t
- (defun jedi/ivy-regex (str)
-   "TODO: docs"
-   (if (and (not (string-empty-p str))
-            (string-equal (upcase str) str))
-       (let*
-           ((chars (butlast (cdr (split-string str ""))))
-            (joiners (make-list (length chars) ".*\\b")))
-         (apply 'concat (butlast (-interleave chars joiners))))
-     (ivy--regex-plus str))))
+(ivy--alist-set 'ivy-re-builders-alist t 'jedi/ivy-regex)
+
+(defun jedi/ivy-regex (input)
+  (let* ((pattern "[[:upper:]]+")
+         (parts (jedi/split-string-keeping-separators input pattern))
+         (fun (lambda (part)
+                (if (string-equal (upcase part) part)
+                    (jedi/to-initials-pattern part)
+                    part)
+                ))
+         (transformed-parts (seq-map fun parts))
+         (query (string-join transformed-parts " ")))
+    (ivy--regex-plus query)))
+
+(defun jedi/to-initials-pattern (uppercase-string)
+  (let*
+      ((chars (butlast (cdr (split-string uppercase-string ""))))
+       (joiners (make-list (length chars) ".*\\b")))
+    (apply 'concat (butlast (-interleave chars joiners)))))
 
 (defun jedi/split-string-keeping-separators (string regex)
   "TODO: docs"
-  (let ((i 0)
+  (let ((case-fold-search nil)
+        (i 0)
         (len (length string))
         (list nil))
     (while (and (< i len)
