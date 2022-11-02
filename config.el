@@ -50,9 +50,9 @@
 ;; they are implemented.
 
 
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 ;; Themes
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -88,9 +88,9 @@
   '(line-number              :foreground "#484f5b")
   '(line-number-current-line :foreground "#f5f7fd"))
 
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 ;; Elm
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 
 ;; NOTE: I use dir-locals to set tell flycheck to use elm-test for spec files
 ;; that is done by calling elm-test-runner--buffer-is-test-p, which is not
@@ -146,9 +146,9 @@ corresponding module"
        :desc "Toggle between test and implementation" "TAB" #'elm-test-runner-toggle-test-and-target
        ))
 
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 ;; Ruby
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (defun ruby/rspec-outline ()
   "Display an outline of specs in the current buffer without actually running them."
@@ -175,9 +175,9 @@ corresponding module"
   :config
   (add-hook! 'ruby-mode-hook #'evil-matchit-mode))
 
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 ;; Flycheck
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 (defvar-local misc/flycheck-local-cache nil)
 
 ;; allow mode-dependand checker chains
@@ -212,9 +212,9 @@ corresponding module"
 
 (global-centered-cursor-mode)
 
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 ;; Formatters
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 (use-package! reformatter
   :config
   (reformatter-define ormolu
@@ -233,9 +233,9 @@ corresponding module"
      (buffer-file-name (list "--stdin-filepath" buffer-file-name))
      ((eq major-mode 'js2-mode) (list "--parser" "babel")))))
 
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 ;; LSP
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (use-package! lsp-mode
   :config
@@ -271,9 +271,9 @@ corresponding module"
   ;; use regular posframe errors for lsp instead of the custom sideline
   lsp-ui-sideline-enable nil)
 
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 ;; Ivy
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (setq ivy-count-format "")
 
@@ -286,9 +286,10 @@ corresponding module"
     ivy-posframe-parameters
         '((left-fringe . 10)
           (right-fringe . 10))))
-;; -----------------------------------------------
+
+;; ----------------------------------------------------------------------------
 ;; Misc
-;; -----------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (setq
   mac-frame-tabbing nil
