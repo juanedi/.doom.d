@@ -77,11 +77,6 @@
         (load-theme next-theme t)
         (setq doom-theme next-theme))))
 
-(map! :leader
-      (:prefix ("T" . "themes")
-        "T" #'jedi/cycle-theme
-        "l" #'load-theme))
-
 (custom-theme-set-faces! 'doom-ayu-mirage
   '(evil-ex-lazy-highlight :background "#6b696b" :foreground "#FCFCFA" :distant-foreground "#19181A")
 
@@ -215,14 +210,6 @@
 (set-face-attribute 'flycheck-posframe-error-face   nil :height 0.8)
 
 (global-centered-cursor-mode)
-
-(map! :leader
-      (:prefix ("e" . "compilation errors")
-       :desc "Go to first error"     "f" #'flycheck-first-error
-       :desc "Go to next error"      "n" #'flycheck-next-error
-       :desc "Go to previous error"  "p" #'flycheck-previous-error
-       :desc "Recompile buffer"      "r" #'flycheck-buffer
-       ))
 
 ;; -----------------------------------------------
 ;; Formatters
@@ -373,6 +360,42 @@
         (window-state-put second-window-state (funcall splitter)))
     (error "Can't toggle window layout when the number of windows isn't two.")))
 
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook (lambda () (unless (eq major-mode 'haskell-mode) (tree-sitter-hl-mode)))))
+
+(remove-hook! 'doom-modeline-mode-hook #'size-indication-mode)
+
+(use-package! dhall-mode
+  :ensure t
+  :mode "\\.dhall\\'")
+
+(let ((local-config-file "~/config.local.el"))
+  (when (file-exists-p local-config-file)
+    (load-file local-config-file)))
+
+;; ----------------------------------------------------------------------------
+;; Global Keybindings
+;;
+;; All keybindings should go here, except those defined that target a specific
+;; mode (which are OK to keep with the rest of the mode's config).
+;; ----------------------------------------------------------------------------
+
+(map! :leader
+      (:prefix ("T" . "themes")
+        "T" #'jedi/cycle-theme
+        "l" #'load-theme))
+
+(map! :leader
+      (:prefix ("e" . "compilation errors")
+       :desc "Go to first error"     "f" #'flycheck-first-error
+       :desc "Go to next error"      "n" #'flycheck-next-error
+       :desc "Go to previous error"  "p" #'flycheck-previous-error
+       :desc "Recompile buffer"      "r" #'flycheck-buffer
+       ))
+
 (map!
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
@@ -432,19 +455,3 @@
       "7" #'winum-select-window-7
       "8" #'winum-select-window-8
       "9" #'winum-select-window-9)
-
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook (lambda () (unless (eq major-mode 'haskell-mode) (tree-sitter-hl-mode)))))
-
-(remove-hook! 'doom-modeline-mode-hook #'size-indication-mode)
-
-(use-package! dhall-mode
-  :ensure t
-  :mode "\\.dhall\\'")
-
-(let ((local-config-file "~/config.local.el"))
-  (when (file-exists-p local-config-file)
-    (load-file local-config-file)))
