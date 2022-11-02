@@ -287,42 +287,66 @@ corresponding module"
         '((left-fringe . 10)
           (right-fringe . 10))))
 
-(ivy--alist-set 'ivy-re-builders-alist t 'jedi/ivy-regex)
-
-(defun jedi/ivy-regex (input)
-  (let* ((pattern "[[:upper:]]+")
-         (parts (jedi/split-string-keeping-separators input pattern))
-         (fun (lambda (part)
-                (if (string-equal (upcase part) part)
-                    (jedi/to-initials-pattern part)
-                    part)
-                ))
-         (transformed-parts (seq-map fun parts))
-         (query (string-join transformed-parts " ")))
-    (ivy--regex-plus query)))
-
-(defun jedi/to-initials-pattern (uppercase-string)
-  (let*
-      ((chars (butlast (cdr (split-string uppercase-string ""))))
-       (joiners (make-list (length chars) ".*\\b")))
-    (apply 'concat (butlast (-interleave chars joiners)))))
-
 (defun jedi/split-string-keeping-separators (string regex)
-  "TODO: docs"
+  "Helper function to split an input string into segments using a regex for
+separators. Unlike `split-string', the separators are returned as part of the
+resulting list."
   (let ((case-fold-search nil)
         (i 0)
         (len (length string))
         (list nil))
     (while (and (< i len)
                 (string-match regex string i))
+      ; add anything between the current point and the beginning of the match
       (if (< i (match-beginning 0))
           (push (substring string i (match-beginning 0)) list))
+      ; add the match itself
       (push (substring string (match-beginning 0) (match-end 0)) list)
       (setq i (match-end 0)))
 
+    ;; add any remaining text after the last match
     (if (< i len)
         (push (substring string i len) list))
     (nreverse list)))
+
+(defun jedi/ivy-regex (input)
+  "Function to turn a query supplied by ivy into the regex that
+we'll use to filter results. Works pretty much like
+`ivy--regex-ignore-order', except that it does a bit of
+pre-processing to allow using sequences of uppercase characters
+as initials.
+
+As an example, this means that \"PLHMain\" will match \"Page/Learn/Home/Main.elm\""
+  (let* (; tokenize the query using sequences of uppercase characters as separators
+         ; e.g.: "PLHMain" -> ("PLHM" "ain")
+         (parts (jedi/split-string-keeping-separators input "[[:upper:]]+"))
+         ; function that turns an uppercase string into a pattern that
+         ; interprets each char as an initial by intercalating a ".*" to match
+         ; any intermediate characters followed by "\\b" (word boundary).
+         ; e.g.: "ABC" -> "A.*\\bB.*\\b"
+         (fun (lambda (part)
+                (if (string-equal (upcase part) part)
+                    (let*
+                        ((chars (split-string part "" t "[[:blank]]"))
+                         (joiners (make-list (length chars) ".*\\b")))
+                      (apply 'concat (butlast (-interleave chars joiners))))
+                  part)
+                ))
+         ; applies the function above to the sequence of tokens, so sequences of
+         ; uppercase chars are interpreted as initials leaving the other
+         ; segments untouched.
+         ; e.g.: ("PLHM" "ain") -> ("P.*\\bL.*\\bH.*\\bM" "ain")
+         (transformed-parts (seq-map fun parts))
+         ; joins the transformed segments with spaces to build a new query
+         ; e.g.: ("P.*\\bL.*\\bH.*\\bM" "ain") -> "P.*\\bL.*\\bH.*\\bM ain"
+         (query (string-join transformed-parts ".*")))
+    ; after pre-processing the query, call `ivy--regex-ignore-order' which
+    ; basically:
+    ;   - splits the input at whitespaces to get a list of subqueries
+    ;   - runs each of those as a separate filter
+    (ivy--regex-ignore-order query)))
+
+(ivy--alist-set 'ivy-re-builders-alist t 'jedi/ivy-regex)
 
 ;; ----------------------------------------------------------------------------
 ;; Misc
