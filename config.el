@@ -287,17 +287,17 @@ corresponding module"
         '((left-fringe . 10)
           (right-fringe . 10))))
 
-(defun jedi/ivy-regex (str)
-  "TODO: docs"
-  (if (and (not (string-empty-p str))
-           (string-equal (upcase str) str))
-      (let*
-          ((chars (butlast (cdr (split-string str ""))))
-           (joiners (make-list (length chars) ".*\\b")))
-        (apply 'concat (butlast (-interleave chars joiners))))
-    (ivy--regex-plus str)))
-
-(ivy--alist-set 'ivy-re-builders-alist t 'jedi/ivy-regex)
+(ivy--alist-set
+ 'ivy-re-builders-alist t
+ (defun jedi/ivy-regex (str)
+   "TODO: docs"
+   (if (and (not (string-empty-p str))
+            (string-equal (upcase str) str))
+       (let*
+           ((chars (butlast (cdr (split-string str ""))))
+            (joiners (make-list (length chars) ".*\\b")))
+         (apply 'concat (butlast (-interleave chars joiners))))
+     (ivy--regex-plus str))))
 
 ;; ----------------------------------------------------------------------------
 ;; Misc
