@@ -284,6 +284,21 @@
   lsp-ui-sideline-enable nil)
 
 ;; -----------------------------------------------
+;; Ivy
+;; -----------------------------------------------
+
+(setq ivy-count-format "")
+
+(use-package! ivy-posframe
+  :config
+  (setf (alist-get t ivy-posframe-display-functions-alist)
+      #'ivy-posframe-display-at-frame-center)
+  (setq
+    ivy-posframe-border-width 3
+    ivy-posframe-parameters
+        '((left-fringe . 10)
+          (right-fringe . 10))))
+;; -----------------------------------------------
 ;; Misc
 ;; -----------------------------------------------
 
@@ -301,8 +316,6 @@
 
   git-link-use-commit t
   git-link-use-single-line-number t
-
-  ivy-count-format ""
 
   doom-font-increment 1
 
@@ -431,16 +444,6 @@
 (use-package! dhall-mode
   :ensure t
   :mode "\\.dhall\\'")
-
-(use-package! ivy-posframe
-  :config
-  (setf (alist-get t ivy-posframe-display-functions-alist)
-      #'ivy-posframe-display-at-frame-center)
-  (setq
-    ivy-posframe-border-width 3
-    ivy-posframe-parameters
-        '((left-fringe . 10)
-          (right-fringe . 10))))
 
 (let ((local-config-file "~/config.local.el"))
   (when (file-exists-p local-config-file)
