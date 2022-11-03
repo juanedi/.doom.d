@@ -298,7 +298,7 @@ resulting list."
     (while (and (< i len)
                 (string-match regex string i))
       ; add anything between the current point and the beginning of the match
-      (if (< i (match-beginning 0))
+      (when (< i (match-beginning 0))
           (push (substring string i (match-beginning 0)) list))
       ; add the match itself
       (push (substring string (match-beginning 0) (match-end 0)) list)
