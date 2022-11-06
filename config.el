@@ -277,12 +277,21 @@ corresponding module"
 
 (setq ivy-count-format "")
 
+(defun jedi/ivy-posframe-display (str)
+  (ivy-posframe--display
+   str
+   (lambda (info) ; NOTE: The structure of INFO can be found in docstring of `posframe-show'.
+     (cons (/ (- (plist-get info :parent-frame-width)
+                 (plist-get info :posframe-width))
+              2)
+           (/ (plist-get info :parent-frame-height) 4)))))
+
 (use-package! ivy-posframe
   :config
-  (setf (alist-get t ivy-posframe-display-functions-alist)
-      #'ivy-posframe-display-at-frame-center)
+  (setf (alist-get t ivy-posframe-display-functions-alist) #'jedi/ivy-posframe-display)
   (setq
     ivy-posframe-border-width 3
+    ivy-posframe-width 100
     ivy-posframe-parameters
         '((left-fringe . 10)
           (right-fringe . 10))))
