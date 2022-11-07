@@ -291,7 +291,6 @@ corresponding module"
   (setf (alist-get t ivy-posframe-display-functions-alist) #'jedi/ivy-posframe-display)
   (setq
     ivy-posframe-border-width 3
-    ivy-posframe-width 100
     ivy-posframe-parameters
         '((left-fringe . 10)
           (right-fringe . 10))))
