@@ -57,7 +57,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq jedi/themes '(doom-ayu-mirage
+(setq jedi/themes '(doom-ayu-dark
+                    doom-ayu-mirage
                     doom-ayu-light
                     doom-city-lights
                     doom-vibrant
@@ -87,6 +88,11 @@
   ;; make the current line number stand out more
   '(line-number              :foreground "#484f5b")
   '(line-number-current-line :foreground "#f5f7fd"))
+
+(custom-theme-set-faces! 'doom-ayu-dark
+  '(line-number               :slant normal :foreground "#373b42")
+  '(line-number-current-line  :slant normal)
+  '(ivy-current-match  :background "#131721"))
 
 ;; ----------------------------------------------------------------------------
 ;; Elm
