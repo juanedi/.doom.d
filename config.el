@@ -181,6 +181,10 @@ corresponding module"
   :config
   (add-hook! 'ruby-mode-hook #'evil-matchit-mode))
 
+; yard mode hook is throwing an error and messing up later hooks. don't really
+; feel like debugging it yet.
+(remove-hook! 'ruby-mode-hook 'yard-mode)
+
 ;; ----------------------------------------------------------------------------
 ;; Flycheck
 ;; ----------------------------------------------------------------------------
