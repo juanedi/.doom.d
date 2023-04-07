@@ -28,11 +28,14 @@ interprets each char as an initial by intercalating a \".*\" to
 match any intermediate characters followed by \"\\b\" (word
 boundary). e.g.: \"ABC\" -> \"A.*\\bB.*\\b\""
   (if (string-equal (upcase part) part)
-      (let*
-          ((chars (split-string part "" t "[[:blank:]]*"))
-           (joiners (make-list (length chars) ".*\\b")))
-        (apply 'concat (butlast (-interleave chars joiners))))
+      (jedi/ivy-regex--uppercase-sequence-to-regex part)
     part))
+
+(defun jedi/ivy-regex--uppercase-sequence-to-regex (part)
+  (let*
+      ((chars (split-string part "" t "[[:blank:]]*"))
+       (joiners (make-list (length chars) ".*\\b")))
+    (apply 'concat (butlast (-interleave chars joiners)))))
 
 (defun jedi/ivy-regex (input)
   "Function to turn a query supplied by ivy into the regex that
