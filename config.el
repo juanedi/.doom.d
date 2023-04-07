@@ -21,7 +21,7 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 14 :weight 'semi-light)
       ;; doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "FuraMono Nerd Font" :size 14))
+(setq doom-font (font-spec :family "Menlo" :size 15))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -57,12 +57,12 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq jedi/themes '(doom-ayu-dark
-                    doom-ayu-mirage
-                    doom-ayu-light
+(setq jedi/themes '(doom-ayu-mirage
                     doom-city-lights
-                    doom-vibrant
-                    doom-nord)
+                    doom-nord
+                    doom-nord-light
+                    doom-solarized-light
+                    )
 
       randomize-theme nil
 
@@ -93,6 +93,10 @@
   '(line-number               :slant normal :foreground "#373b42")
   '(line-number-current-line  :slant normal)
   '(ivy-current-match  :background "#131721"))
+
+(custom-theme-set-faces! 'doom-solarized-light
+  '(line-number               :slant normal :foreground "#96A7A9")
+  '(line-number-current-line  :slant normal :foreground "#556b72" :background "#d6d0bf"))
 
 ;; ----------------------------------------------------------------------------
 ;; Elm
