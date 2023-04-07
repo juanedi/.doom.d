@@ -18,3 +18,6 @@
 
 ;; sequences of uppercase letters are interpreted as as "initials"
 (jedi/ivy-regex--check "PLH" "Page/Learn/Home/Main.elm")
+
+;; sequences of uppercase chars also match as a literal
+(jedi/ivy-regex--check "PLH" "PLH.txt")
