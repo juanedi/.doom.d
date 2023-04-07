@@ -1,6 +1,6 @@
 ;;; ivy-regex.el -*- lexical-binding: t; -*-
 
-(defun jedi/split-string-keeping-separators (string regex)
+(defun jedi/ivy-regex--split-string-keeping-separators (string regex)
   "Helper function to split an input string into segments using a regex for
 separators. Unlike `split-string', the separators are returned as part of the
 resulting list."
@@ -32,7 +32,7 @@ as initials.
 As an example, this means that \"PLHMain\" will match \"Page/Learn/Home/Main.elm\""
   (let* (; tokenize the query using sequences of uppercase characters as separators
          ; e.g.: "PLHMain" -> ("PLHM" "ain")
-         (parts (jedi/split-string-keeping-separators input "[[:upper:]]+"))
+         (parts (jedi/ivy-regex--split-string-keeping-separators input "[[:upper:]]+"))
          ; function that turns an uppercase string into a pattern that
          ; interprets each char as an initial by intercalating a ".*" to match
          ; any intermediate characters followed by "\\b" (word boundary).
