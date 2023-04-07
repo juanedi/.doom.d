@@ -22,6 +22,19 @@ resulting list."
         (push (substring string i len) list))
     (nreverse list)))
 
+(defun jedi/ivy-regex--part-to-initials (part)
+  "function that turns an uppercase string into a pattern that
+interprets each char as an initial by intercalating a \".*\" to
+match any intermediate characters followed by \"\\b\" (word
+boundary). e.g.: \"ABC\" -> \"A.*\\bB.*\\b\""
+  (if (string-equal (upcase part) part)
+      (let*
+          ((chars (split-string part "" t "[[:blank:]]*"))
+           (joiners (make-list (length chars) ".*\\b")))
+        (apply 'concat (butlast (-interleave chars joiners))))
+    part))
+
+
 (defun jedi/ivy-regex (input)
   "Function to turn a query supplied by ivy into the regex that
 we'll use to filter results. Works pretty much like
@@ -33,23 +46,11 @@ As an example, this means that \"PLHMain\" will match \"Page/Learn/Home/Main.elm
   (let* (; tokenize the query using sequences of uppercase characters as separators
          ; e.g.: "PLHMain" -> ("PLHM" "ain")
          (parts (jedi/ivy-regex--split-string-keeping-separators input "[[:upper:]]+"))
-         ; function that turns an uppercase string into a pattern that
-         ; interprets each char as an initial by intercalating a ".*" to match
-         ; any intermediate characters followed by "\\b" (word boundary).
-         ; e.g.: "ABC" -> "A.*\\bB.*\\b"
-         (fun (lambda (part)
-                (if (string-equal (upcase part) part)
-                    (let*
-                        ((chars (split-string part "" t "[[:blank:]]*"))
-                         (joiners (make-list (length chars) ".*\\b")))
-                      (apply 'concat (butlast (-interleave chars joiners))))
-                  part)
-                ))
          ; applies the function above to the sequence of tokens, so sequences of
          ; uppercase chars are interpreted as initials leaving the other
          ; segments untouched.
          ; e.g.: ("PLHM" "ain") -> ("P.*\\bL.*\\bH.*\\bM" "ain")
-         (transformed-parts (seq-map fun parts))
+         (transformed-parts (seq-map #'jedi/ivy-regex--part-to-initials parts))
          ; joins the transformed segments to build a new query
          ; e.g.: ("P.*\\bL.*\\bH.*\\bM" "ain") -> "P.*\\bL.*\\bH.*\\bMain"
          (query (string-join transformed-parts "")))
