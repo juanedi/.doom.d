@@ -22,6 +22,11 @@ resulting list."
         (push (substring string i len) list))
     (nreverse list)))
 
+(defun jedi/ivy-regex--or (regex1 regex2)
+  "Builds a regular expression that matches an input if and only
+if either one of the two sub-regexes matches."
+  (concat "\\(?:" regex1 "\\)\\|\\(?:" regex2 "\\)"))
+
 (defun jedi/ivy-regex--part-to-regex (part)
   "function that turns an uppercase string into a pattern that
 interprets each char as an initial by intercalating a \".*\" to
@@ -32,10 +37,17 @@ boundary). e.g.: \"ABC\" -> \"A.*\\bB.*\\b\""
     part))
 
 (defun jedi/ivy-regex--uppercase-sequence-to-regex (part)
+  "builds the regex used for a sequence of uppercase characters.
+these are interpreted as either:
+
+- a literal
+- a sequence of initials
+"
   (let*
       ((chars (split-string part "" t "[[:blank:]]*"))
-       (joiners (make-list (length chars) ".*\\b")))
-    (apply 'concat (butlast (-interleave chars joiners)))))
+       (joiners (make-list (length chars) ".*\\b"))
+       (initials-regex (apply 'concat (butlast (-interleave chars joiners)))))
+    (jedi/ivy-regex--or part initials-regex)))
 
 (defun jedi/ivy-regex (input)
   "Function to turn a query supplied by ivy into the regex that
@@ -49,10 +61,10 @@ As an example, this means that \"PLHMain\" will match \"Page/Learn/Home/Main.elm
          ; e.g.: "PLHMain" -> ("PLHM" "ain")
          (parts (jedi/ivy-regex--split-string-keeping-separators input "[[:upper:]]+"))
          ;; turns each part into a regex
-         ; e.g.: ("PLHM" "ain") -> ("P.*\\bL.*\\bH.*\\bM" "ain")
+         ; e.g.: ("PLHM" "ain") -> ("(P.*\\bL.*\\bH.*\\bM|PLHM)" "ain")
          (transformed-parts (seq-map #'jedi/ivy-regex--part-to-regex parts))
          ; joins the transformed segments to build a new query
-         ; e.g.: ("P.*\\bL.*\\bH.*\\bM" "ain") -> "P.*\\bL.*\\bH.*\\bMain"
+         ; e.g.: ("(P.*\\bL.*\\bH.*\\bM|PLHM)" "ain") -> "(P.*\\bL.*\\bH.*\\b|PLH)Main"
          (query (string-join transformed-parts "")))
     ; after pre-processing the query, call `ivy--regex-ignore-order' which
     ; basically:
