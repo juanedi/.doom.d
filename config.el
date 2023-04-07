@@ -310,7 +310,6 @@ corresponding module"
           (right-fringe . 10))))
 
 (load-file (concat doom-user-dir "ivy-regex.el"))
-(load-file (concat doom-user-dir "ivy-regex-tests.el"))
 (ivy--alist-set 'ivy-re-builders-alist t 'jedi/ivy-regex)
 
 ;; ----------------------------------------------------------------------------
