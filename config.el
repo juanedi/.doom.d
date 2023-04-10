@@ -87,7 +87,9 @@
 
   ;; make the current line number stand out more
   '(line-number              :foreground "#484f5b")
-  '(line-number-current-line :foreground "#f5f7fd"))
+  '(line-number-current-line :foreground "#f5f7fd")
+
+  '(copilot-overlay-face :slant italic :inherit 'shadow))
 
 (custom-theme-set-faces! 'doom-ayu-dark
   '(line-number               :slant normal :foreground "#373b42")
