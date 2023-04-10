@@ -329,10 +329,8 @@ e.g. via M-C-<return>.")
   :after company
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word))
+              ("C-TAB" . 'copilot-accept-completion-by-word))
   :config
   (add-to-list 'copilot-disable-predicates (lambda () jedi/copilot-manual-mode))
   (map! :i "C-SPC" 'jedi/copilot-complete-or-accept)
