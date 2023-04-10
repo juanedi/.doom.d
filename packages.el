@@ -59,3 +59,6 @@
 (package! reformatter)
 (package! tree-sitter)
 (package! tree-sitter-langs)
+
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))

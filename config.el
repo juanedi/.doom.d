@@ -313,6 +313,59 @@ corresponding module"
 (ivy--alist-set 'ivy-re-builders-alist t 'jedi/ivy-regex)
 
 ;; ----------------------------------------------------------------------------
+;; Copilot
+;;
+;; Heavily inspired by
+;; https://robert.kra.hn/posts/2023-02-22-copilot-emacs-setup/
+;; ----------------------------------------------------------------------------
+
+(defvar jedi/copilot-manual-mode t
+  "When `t' will only show completions when manually triggered,
+e.g. via M-C-<return>.")
+
+(use-package! copilot
+  :after company
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word))
+  :config
+  (add-to-list 'copilot-disable-predicates (lambda () jedi/copilot-manual-mode))
+  (map! :i "C-SPC" 'jedi/copilot-complete-or-accept)
+  (define-key! company-active-map "C-SPC" 'jedi/copilot-complete-or-accept))
+
+(defun jedi/copilot-complete-or-accept ()
+  "Command that either triggers a completion or accepts one if one
+is available. Useful if you tend to hammer your keys like I do."
+  (interactive)
+  (if (copilot--overlay-visible)
+      (copilot-accept-completion)
+    (progn
+      (company-abort)
+      (copilot-complete))))
+
+(defun jedi/copilot-change-activation ()
+  "Switch between three activation modes:
+- automatic: copilot will automatically overlay completions
+- manual: you need to press a key (M-C-<return>) to trigger completions
+- off: copilot is completely disabled."
+  (interactive)
+  (if (and copilot-mode jedi/copilot-manual-mode)
+      (progn
+        (message "deactivating copilot")
+        (global-copilot-mode -1)
+        (setq jedi/copilot-manual-mode nil))
+    (if copilot-mode
+        (progn
+          (message "activating copilot manual mode")
+          (setq jedi/copilot-manual-mode t))
+      (message "activating copilot mode")
+      (global-copilot-mode))))
+
+
+;; ----------------------------------------------------------------------------
 ;; Misc
 ;; ----------------------------------------------------------------------------
 
