@@ -59,7 +59,7 @@ as initials.
 As an example, this means that \"PLHMain\" will match \"Page/Learn/Home/Main.elm\""
   (let* (; tokenize the query using sequences of uppercase characters as separators
          ; e.g.: "PLHMain" -> ("PLHM" "ain")
-         (parts (jedi/ivy-regex--split-string-keeping-separators input "[[:upper:]]+"))
+         (parts (jedi/ivy-regex--split-string-keeping-separators input "[[:upper:]][[:upper:]]+"))
          ;; turns each part into a regex
          ; e.g.: ("PLHM" "ain") -> ("(P.*\\bL.*\\bH.*\\bM|PLHM)" "ain")
          (transformed-parts (seq-map #'jedi/ivy-regex--part-to-regex parts))
