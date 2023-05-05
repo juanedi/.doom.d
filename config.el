@@ -60,6 +60,7 @@
 (setq jedi/themes '(doom-ayu-mirage
                     doom-city-lights
                     doom-nord
+                    doom-molokai
                     doom-nord-light
                     doom-solarized-light
                     )
@@ -98,7 +99,10 @@
 
 (custom-theme-set-faces! 'doom-solarized-light
   '(line-number               :slant normal :foreground "#96A7A9")
-  '(line-number-current-line  :slant normal :foreground "#556b72" :background "#d6d0bf"))
+  '(line-number-current-line  :slant normal :foreground "#556b72" :background "#d6d0bf")
+  '(line-number-current-line  :slant normal :foreground "#556b72" :background "#d6d0bf")
+  '(font-lock-type-face       :slant normal :foreground "#b58900")
+  )
 
 ;; ----------------------------------------------------------------------------
 ;; Elm
