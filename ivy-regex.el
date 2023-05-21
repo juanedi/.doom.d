@@ -45,7 +45,7 @@ these are interpreted as either:
 "
   (let*
       ((chars (split-string part "" t "[[:blank:]]*"))
-       (joiners (make-list (length chars) ".*\\b"))
+       (joiners (make-list (length chars) ".*"))
        (initials-regex (apply 'concat (butlast (-interleave chars joiners)))))
     (jedi/ivy-regex--or part initials-regex)))
 
@@ -61,10 +61,10 @@ As an example, this means that \"PLHMain\" will match \"Page/Learn/Home/Main.elm
          ; e.g.: "PLHMain" -> ("PLHM" "ain")
          (parts (jedi/ivy-regex--split-string-keeping-separators input "[[:upper:]][[:upper:]]+"))
          ;; turns each part into a regex
-         ; e.g.: ("PLHM" "ain") -> ("(P.*\\bL.*\\bH.*\\bM|PLHM)" "ain")
+         ; e.g.: ("PLHM" "ain") -> ("(P.*L.*H.*M|PLHM)" "ain")
          (transformed-parts (seq-map #'jedi/ivy-regex--part-to-regex parts))
          ; joins the transformed segments to build a new query
-         ; e.g.: ("(P.*\\bL.*\\bH.*\\bM|PLHM)" "ain") -> "(P.*\\bL.*\\bH.*\\b|PLH)Main"
+         ; e.g.: ("(P.*L.*H.*M|PLHM)" "ain") -> "(P.*L.*H.*|PLH)Main"
          (query (string-join transformed-parts "")))
     ; after pre-processing the query, call `ivy--regex-ignore-order' which
     ; basically:
@@ -94,6 +94,9 @@ As an example, this means that \"PLHMain\" will match \"Page/Learn/Home/Main.elm
 
 ;; sequences of uppercase letters are interpreted as as "initials"
 (jedi/ivy-regex--check "PLH" "Page/Learn/Home/Main.elm")
+
+;; sequences of uppercase letters are interpreted as as "initials" with no separator needed between them
+(jedi/ivy-regex--check "FB" "FooBar.txt")
 
 ;; sequences of uppercase chars also match as a literal
 (jedi/ivy-regex--check "PLH" "PLH.txt")
