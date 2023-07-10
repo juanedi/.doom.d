@@ -57,7 +57,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq jedi/themes '(doom-ayu-mirage
+(setq jedi/themes '(timu-spacegrey
+                    doom-ayu-mirage
                     doom-city-lights
                     doom-nord
                     doom-molokai
@@ -103,6 +104,9 @@
   '(line-number-current-line  :slant normal :foreground "#556b72" :background "#d6d0bf")
   '(font-lock-type-face       :slant normal :foreground "#b58900")
   )
+
+(custom-theme-set-faces! 'timu-spacegray
+  '(ivy-posframe-border       :foreground "#232830" :background "#232830"))
 
 ;; ----------------------------------------------------------------------------
 ;; Elm
