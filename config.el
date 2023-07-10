@@ -339,7 +339,7 @@ corresponding module"
 ;; https://robert.kra.hn/posts/2023-02-22-copilot-emacs-setup/
 ;; ----------------------------------------------------------------------------
 
-(defvar jedi/copilot-manual-mode t
+(defvar jedi/copilot-manual-mode nil
   "When `t' will only show completions when manually triggered,
 e.g. via M-C-<return>.")
 
@@ -351,8 +351,10 @@ e.g. via M-C-<return>.")
               ("C-TAB" . 'copilot-accept-completion-by-word))
   :config
   (add-to-list 'copilot-disable-predicates (lambda () jedi/copilot-manual-mode))
+  (setq-default company-idle-delay nil)
   (map! :i "C-SPC" 'jedi/copilot-complete-or-accept)
-  (define-key! company-active-map "C-SPC" 'jedi/copilot-complete-or-accept))
+  (define-key! company-active-map "C-SPC" 'jedi/copilot-complete-or-accept)
+  )
 
 (defun jedi/copilot-complete-or-accept ()
   "Command that either triggers a completion or accepts one if one
