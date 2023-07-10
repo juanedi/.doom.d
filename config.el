@@ -466,13 +466,14 @@ is available. Useful if you tend to hammer your keys like I do."
   :config
   (require 'tree-sitter-langs)
   (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook (lambda () (unless (eq major-mode 'haskell-mode) (tree-sitter-hl-mode)))))
+  (add-hook 'tree-sitter-after-on-hook
+            (lambda () (unless (member major-mode '(ruby-mode haskell-mode)) (tree-sitter-hl-mode)))))
 
 (remove-hook! 'doom-modeline-mode-hook #'size-indication-mode)
 
-(use-package! dhall-mode
-  :ensure t
-  :mode "\\.dhall\\'")
+;; (use-package! dhall-mode
+;;   :ensure t
+;;   :mode "\\.dhall\\'")
 
 (let ((local-config-file "~/config.local.el"))
   (when (file-exists-p local-config-file)
