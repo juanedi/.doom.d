@@ -408,6 +408,8 @@ is available. Useful if you tend to hammer your keys like I do."
   auth-sources '("~/.authinfo.gpg")
   )
 
+(global-visual-line-mode 1)
+
 (use-package! treemacs
   :config
   (setq treemacs-width 30
