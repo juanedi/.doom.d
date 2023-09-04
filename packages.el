@@ -51,7 +51,6 @@
 (package! centered-cursor-mode)
 (package! color-theme-sanityinc-tomorrow)
 (package! timu-spacegrey-theme)
-(package! dhall-mode)
 (package! elm-test-runner)
 (package! evil-matchit)
 (package! flycheck-posframe)
