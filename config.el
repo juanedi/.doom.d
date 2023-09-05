@@ -179,7 +179,7 @@ corresponding module"
       (:prefix ("t" . "tests")
        :desc "Run tests in buffer"                    "v"   #'elm-test-runner-run
        :desc "Re-run last test"                       "r"   #'elm-test-runner-rerun
-       :desc "Toggle between test and implementation" "TAB" #'elm-test-runner-toggle-test-and-target
+       :desc "Toggle between test and implementation" "T" #'elm-test-runner-toggle-test-and-target
        ))
 
 ;; ----------------------------------------------------------------------------
