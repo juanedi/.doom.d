@@ -134,12 +134,6 @@
 ;; Elm
 ;; ----------------------------------------------------------------------------
 
-;; NOTE: I use dir-locals to set tell flycheck to use elm-test for spec files
-;; that is done by calling elm-test-runner--buffer-is-test-p, which is not
-;; autoloaded. I should change the package to autoload that function, but in the
-;; meantime this will do.
-(add-hook! elm-mode (require 'elm-test-runner))
-
 (setq elm-format-on-save t)
 
 (defun elm/import (&optional input)
