@@ -349,6 +349,21 @@ corresponding module"
 (ivy--alist-set 'ivy-re-builders-alist t 'jedi/ivy-regex)
 
 ;; ----------------------------------------------------------------------------
+;; Copilot
+;; ----------------------------------------------------------------------------
+
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+  ))
+
+;; configure company to suggest on demand rather than automaticall to avoiid conflicts
+(setq company-idle-delay nil)
+
+;; ----------------------------------------------------------------------------
 ;; Misc
 ;; ----------------------------------------------------------------------------
 
