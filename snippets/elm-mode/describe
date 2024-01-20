@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: describe
+# key: des
+# --
+describe "${1:block name}"
+    [ $2
+    ]
+

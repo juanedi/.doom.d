@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: todo
+# key: t
+# --
+
+(Debug.todo "TODO")

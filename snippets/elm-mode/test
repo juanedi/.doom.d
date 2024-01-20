@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: test
+# key: test
+# --
+
+test "${1:test name}" <|
+    \_ ->
+        ${2:Expect.equal 1 1}
+
