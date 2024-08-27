@@ -226,6 +226,29 @@ corresponding module"
 (remove-hook! 'ruby-mode-hook 'yard-mode)
 
 ;; ----------------------------------------------------------------------------
+;; LaTeX
+;; ----------------------------------------------------------------------------
+
+(defvar jedi/pdflatex-close-compilation-buffer-after-compile t)
+(defvar jedi/pdflatex-revert-preview-buffer-after-compile t)
+
+(defun jedi/after-pdflatex-compilation (cur-buffer msg)
+  (interactive)
+  (when (and
+            jedi/pdflatex-close-compilation-buffer-after-compile
+            (string-match "finished" msg))
+        (message "Compilation finished successfully")
+        (quit-window nil (get-buffer-window cur-buffer 0)))
+
+  (when jedi/pdflatex-revert-preview-buffer-after-compile
+      (dolist (buf (projectile-buffers-with-file (projectile-project-buffers)))
+      (with-current-buffer buf
+        (when (string= (file-name-extension (buffer-file-name)) "pdf")
+          (revert-buffer t t t))))))
+
+(add-hook 'compilation-finish-functions 'jedi/after-pdflatex-compilation)
+
+;; ----------------------------------------------------------------------------
 ;; Flycheck
 ;; ----------------------------------------------------------------------------
 (defvar-local misc/flycheck-local-cache nil)
@@ -530,3 +553,10 @@ corresponding module"
       "7" #'winum-select-window-7
       "8" #'winum-select-window-8
       "9" #'winum-select-window-9)
+
+(add-hook 'markdown-mode-hook 'pandoc-mode)
+(add-hook 'pandoc-async-success-hook #'pandoc-view-output)
+
+(map! :map pandoc-mode-map
+      :i "C-c C-p" #'pandoc-convert-to-pdf
+      :n "C-c C-p" #'pandoc-convert-to-pdf)
