@@ -64,7 +64,7 @@ As an example, this means that \"PLHMain\" will match \"Page/Learn/Home/Main.elm
          ; e.g.: ("PLHM" "ain") -> ("(P.*L.*H.*M|PLHM)" "ain")
          (transformed-parts (seq-map #'jedi/ivy-regex--part-to-regex parts))
          ; joins the transformed segments to build a new query
-         ; e.g.: ("(P.*L.*H.*M|PLHM)" "ain") -> "(P.*L.*H.*|PLH)Main"
+         ; e.g.: ("(P.*L.*H.*M|PLHM)" "ain") -> "(P.*L.*H.*M|PLHM)ain"
          (query (string-join transformed-parts "")))
     ; after pre-processing the query, call `ivy--regex-ignore-order' which
     ; basically:
