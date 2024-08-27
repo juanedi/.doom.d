@@ -1,7 +1,9 @@
 # -*- mode: snippet -*-
 # name: only
+# binding: C-c C-o
 # key: only
 # condition: t
 # --
 
-Test.only <| 
+Test.only <|
+    `yas-selected-text`$0
