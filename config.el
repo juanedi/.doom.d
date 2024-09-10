@@ -345,7 +345,7 @@ corresponding module"
   ;;  instead.
   (remove-hook! 'lsp-mode-hook '+lsp-display-guessed-project-root-h)
   (defadvice! +lsp-display-guessed-project-root (root)
-    "Log what LSP things is the root of the current project."
+    "Log what LSP thinks is the root of the current project."
     ;; Makes it easier to detect root resolution issues.
     :filter-return #'lsp--calculate-root
     (if root
@@ -427,7 +427,18 @@ corresponding module"
 
   ;; use encrypted token store for forge
   auth-sources '("~/.authinfo.gpg")
+
+  ;; ;; order buffers by most recently used
+  ;; helm-buffers-sort-fn #'helm-fuzzy-matching-sort-fn-preserve-ties-order
   )
+
+(setq-default line-spacing 4)
+
+(setq-default
+ compilation-scroll-output t
+ compilation-window-height 20)
+
+;; (remove-hook! compilation-mode (text-scale-increase -2))
 
 (global-visual-line-mode 1)
 
@@ -435,7 +446,9 @@ corresponding module"
   :config
   (setq treemacs-width 30
         doom-themes-treemacs-enable-variable-pitch nil)
-  (add-hook! treemacs-mode (text-scale-adjust -1)))
+  (add-hook! treemacs-mode (text-scale-adjust -1))
+  (add-hook! treemacs-mode #'solaire-mode)
+  )
 
 (use-package! which-key
   :config
@@ -446,6 +459,9 @@ corresponding module"
   (counsel-projectile-modify-action
     'counsel-projectile-switch-project-action
     '((default counsel-projectile-switch-project-action-vc))))
+
+;; used by helm-projectile
+(setq projectile-switch-project-action 'magit-status)
 
 ; restore keybindings that magit overrides in blob mode
 (map! :map magit-blob-mode-map
@@ -510,6 +526,7 @@ corresponding module"
   :n "C-H" #'evil-first-non-blank
   :n "C-L" #'evil-end-of-line
   :n "C-SPC" #'ivy-switch-buffer
+  ;; :n "C-SPC" #'switch-to-buffer
   :n "C-=" #'er/expand-region)
 
 (map! :leader
@@ -554,7 +571,7 @@ corresponding module"
       ; skip doom's wrapper (+ivy/projectile-find-file) which uses the incorrect
       ; cwd to build the target file when opening target in another window via
       ; C-o j (will use the current directory instead of the project root)
-      "p f" #'counsel-projectile-find-file
+      ;; "p f" #'counsel-projectile-find-file
 
       "w +" #'misc/window-layout-toggle
       "w v" #'+evil/window-vsplit-and-follow
