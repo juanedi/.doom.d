@@ -316,7 +316,9 @@ corresponding module"
 (use-package! reformatter
   :config
   (reformatter-define ormolu
-    :program "ormolu")
+    :program "ormolu"
+    :args (list "--stdin-input-file" buffer-file-name)
+    )
 
   (reformatter-define fourmolu
     :program "fourmolu")
