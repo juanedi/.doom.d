@@ -297,8 +297,9 @@ corresponding module"
   flycheck-highlighting-mode 'lines
   flycheck-navigation-minimum-level 'error
   flycheck-posframe-border-width 10
-  flycheck-posframe-prefix "\u24be "
-  flycheck-posframe-info-prefix "\u24be "
+  flycheck-posframe-prefix nil
+  flycheck-posframe-info-prefix nil
+  flycheck-posframe-error-prefix nil
   flycheck-posframe-position 'frame-bottom-right-corner
   )
 
