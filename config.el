@@ -210,6 +210,10 @@ corresponding module"
       (:prefix ("i" . "import")
        :desc "Add import"              "i"   #'elm/import))
 
+(use-package! haskell-mode
+  :config
+  (setq haskell-font-lock-quasi-quote-modes (assoc-delete-all "sql" haskell-font-lock-quasi-quote-modes)))
+
 ;; ----------------------------------------------------------------------------
 ;; Ruby
 ;; ----------------------------------------------------------------------------
