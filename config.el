@@ -561,7 +561,7 @@ corresponding module"
       "w s" #'+evil/window-split-and-follow
       "w x" #'kill-buffer-and-window
 
-      "0" #'winum-select-window-0-or-10
+      "0" #'treemacs-select-window
       "1" #'winum-select-window-1
       "2" #'winum-select-window-2
       "3" #'winum-select-window-3
