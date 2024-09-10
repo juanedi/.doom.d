@@ -114,7 +114,13 @@
   '(line-number              :foreground "#484f5b")
   '(line-number-current-line :foreground "#f5f7fd")
 
-  '(copilot-overlay-face :slant italic :inherit 'shadow))
+  '(copilot-overlay-face :slant italic :inherit 'shadow)
+
+  '(helm-selection :background "#2f3b54")
+
+  '(flycheck-posframe-background-face :background "#363943")
+  '(flycheck-posframe-error-face      :foreground "white" :background "#363943")
+  )
 
 (custom-theme-set-faces! 'doom-ayu-dark
   '(line-number               :slant normal :foreground "#373b42")
