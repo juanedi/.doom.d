@@ -251,7 +251,8 @@ corresponding module"
 ;; LaTeX
 ;; ----------------------------------------------------------------------------
 
-(defvar jedi/pdflatex-close-compilation-buffer-after-compile t)
+; TODO: setting these via dir-locals doesn't work
+(defvar jedi/pdflatex-close-compilation-buffer-after-compile nil)
 (defvar jedi/pdflatex-revert-preview-buffer-after-compile t)
 
 (defun jedi/after-pdflatex-compilation (cur-buffer msg)
