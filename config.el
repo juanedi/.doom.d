@@ -270,6 +270,8 @@ corresponding module"
 
 (add-hook 'compilation-finish-functions 'jedi/after-pdflatex-compilation)
 
+(setq tex-fontify-script nil)
+
 ;; ----------------------------------------------------------------------------
 ;; Flycheck
 ;; ----------------------------------------------------------------------------
