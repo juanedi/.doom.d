@@ -119,7 +119,7 @@
   '(helm-selection :background "#2f3b54")
 
   '(flycheck-posframe-background-face :background "#363943")
-  '(flycheck-posframe-error-face      :foreground "white" :background "#363943")
+  '(flycheck-posframe-error-face      :foreground "#cbccc6" :background "#363943")
   )
 
 (custom-theme-set-faces! 'doom-ayu-dark
@@ -135,7 +135,18 @@
   )
 
 (custom-theme-set-faces! 'timu-spacegray
-  '(ivy-posframe-border       :foreground "#232830" :background "#232830"))
+  '(ivy-posframe-border        :foreground "#232830" :background "#232830")
+
+  '(helm-posframe-border       :foreground "#232830" :background "#232830")
+  '(helm-rg-file-match-face    :foreground "#ffffff")
+  )
+
+(custom-theme-set-faces! 'doom-tomorrow-night
+  '(helm-ff-file-extension    :foreground "#c5c8c6")
+  '(helm-ff-file-extension    :foreground "#c5c8c6")
+  '(hl-line                   :background "#333537")
+  '(treemacs-hl-line-face     :background "#333537")
+  )
 
 ;; ----------------------------------------------------------------------------
 ;; Elm
