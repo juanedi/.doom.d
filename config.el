@@ -331,7 +331,19 @@ corresponding module"
     :args
     (cond
      (buffer-file-name (list "--stdin-filepath" buffer-file-name))
-     ((eq major-mode 'js2-mode) (list "--parser" "babel")))))
+     ((eq major-mode 'js2-mode) (list "--parser" "babel"))))
+
+  (reformatter-define sqlfluff
+    :program "sqlfluff"
+    :stdin nil
+    :stdout nil
+    :args
+    (list "format"
+          buffer-file-name
+          "--dialect" "ansi")
+    )
+  )
+
 
 ;; ----------------------------------------------------------------------------
 ;; LSP
