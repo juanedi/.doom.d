@@ -28,7 +28,7 @@
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 14 :weight 'medium))
+(setq doom-font (font-spec :family "Monaco" :size 14 :weight 'medium))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -79,12 +79,12 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq jedi/themes '(doom-ayu-mirage
+(setq jedi/themes '(
                     timu-spacegrey
+                    doom-ayu-mirage
                     doom-tomorrow-night
                     doom-city-lights
                     doom-nord
-                    doom-molokai
                     doom-nord-light
                     doom-solarized-light
                     )
@@ -408,23 +408,28 @@ corresponding module"
         '((left-fringe . 10)
           (right-fringe . 10))))
 
-(load-file (concat doom-user-dir "ivy-regex.el"))
-(ivy--alist-set 'ivy-re-builders-alist t 'jedi/ivy-regex)
+;; (load-file (concat doom-user-dir "ivy-regex.el"))
+;; (ivy--alist-set 'ivy-re-builders-alist t 'jedi/ivy-regex)
+;; (ivy--alist-set 'ivy-re-builders-alist t 'ivy--regex-plus)
+;; (ivy--alist-set 'ivy-re-builders-alist t 'ivy--regex-fuzzy)
 
 ;; ----------------------------------------------------------------------------
 ;; Copilot
 ;; ----------------------------------------------------------------------------
 
-;; accept completion from copilot and fallback to company
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-  ))
+;; ;; accept completion from copilot and fallback to company
+;; (use-package! copilot
+;;   :hook (prog-mode . copilot-mode)
+;;   :bind (:map copilot-completion-map
+;;               ("<tab>" . 'copilot-accept-completion)
+;;               ("TAB" . 'copilot-accept-completion)
+;;               ;; ("C-TAB" . 'copilot-accept-completion-by-word)
+;;               ;; ("C-<tab>" . 'copilot-accept-completion-by-word))
+;;   ))
 
-;; configure company to suggest on demand rather than automaticall to avoiid conflicts
-(setq company-idle-delay nil)
+
+;; ;; configure company to suggest on demand rather than automaticall to avoiid conflicts
+;; (setq company-idle-delay nil)
 
 ;; ----------------------------------------------------------------------------
 ;; Misc
@@ -483,7 +488,7 @@ corresponding module"
     '((default counsel-projectile-switch-project-action-vc))))
 
 ;; used by helm-projectile
-(setq projectile-switch-project-action 'magit-status)
+;; (setq projectile-switch-project-action 'magit-status)
 
 ; restore keybindings that magit overrides in blob mode
 (map! :map magit-blob-mode-map

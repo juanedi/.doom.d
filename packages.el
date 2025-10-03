@@ -61,6 +61,7 @@
 (package! tree-sitter-langs)
 (package! graphviz-dot-mode)
 (package! pandoc-mode)
-
+(package! rescript-mode)
+(package! lsp-rescript)
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist")))
