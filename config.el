@@ -15,7 +15,7 @@
 ;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
 ;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
+;; - `doom-symbol-font' -- for symbols
 ;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 ;;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
@@ -445,7 +445,7 @@ corresponding module"
   ruby-insert-encoding-magic-comment nil
 
   ;; tune initial frame size
-  initial-frame-alist '((width . 80) (height . 30))
+  ;; initial-frame-alist '((width . 80) (height . 30))
 
   git-link-use-commit t
   git-link-use-single-line-number t
@@ -524,12 +524,12 @@ corresponding module"
         (window-state-put second-window-state (funcall splitter)))
     (error "Can't toggle window layout when the number of windows isn't two.")))
 
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook
-            (lambda () (unless (member major-mode '(ruby-mode haskell-mode)) (tree-sitter-hl-mode)))))
+;; (use-package! tree-sitter
+;;   :config
+;;   (require 'tree-sitter-langs)
+;;   (global-tree-sitter-mode)
+;;   (add-hook 'tree-sitter-after-on-hook
+;;             (lambda () (unless (member major-mode '(ruby-mode haskell-mode)) (tree-sitter-hl-mode)))))
 
 (remove-hook! 'doom-modeline-mode-hook #'size-indication-mode)
 
@@ -552,8 +552,6 @@ corresponding module"
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
   :n "C-L" #'evil-end-of-line
-  :n "C-SPC" #'ivy-switch-buffer
-  ;; :n "C-SPC" #'switch-to-buffer
   :n "C-=" #'er/expand-region)
 
 (map! :leader
