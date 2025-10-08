@@ -65,3 +65,5 @@
 ;;(package! tree-sitter-langs)
 ;; (package! graphviz-dot-mode)
 (package! pandoc-mode)
+(package! claude-code-ide
+  :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
