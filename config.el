@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-nova)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -155,6 +155,10 @@ corresponding module"
       :map rspec-mode-map
       :desc "Display an outline of the speec" "t o"   #'ruby/rspec-outline)
 
+;; ----------------------------------------------------------------------------
+;; Misc
+;; ----------------------------------------------------------------------------
+
 (setq
   mac-frame-tabbing nil
 
@@ -175,6 +179,14 @@ corresponding module"
 
 (setq-default line-spacing 4)
 
+(setq projectile-switch-project-action
+      (lambda ()
+        (if (file-exists-p (expand-file-name ".git" (projectile-project-root)))
+            (magit-status)
+          (projectile-find-file))))
+
+(global-centered-cursor-mode)
+
 ;; ----------------------------------------------------------------------------
 ;; Global Keybindings
 ;;
@@ -186,7 +198,9 @@ corresponding module"
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
   :n "C-L" #'evil-end-of-line
-  :n "C-=" #'er/expand-region)
+  :n "C-=" #'er/expand-region
+  :n "C-c C-t" (lambda () (interactive) (find-file "~/Dropbox/Apps/org-notes/things.org"))
+  )
 
 (map! :leader
       (:prefix ("e" . "compilation errors")
@@ -225,7 +239,7 @@ corresponding module"
       "i k" #'+evil/insert-newline-above
       "i j" #'+evil/insert-newline-below
 
-      ;; "j j" #'avy-goto-char-2
+      "j j" #'avy-goto-char-2
 
       ; skip doom's wrapper (+ivy/projectile-find-file) which uses the incorrect
       ; cwd to build the target file when opening target in another window via
@@ -248,3 +262,4 @@ corresponding module"
       ;; "8" #'winum-select-window-8
       ;; "9" #'winum-select-window-9
       )
+

@@ -53,4 +53,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
+(package! centered-cursor-mode)
 (package! elm-test-runner)
+(package! git-link)
