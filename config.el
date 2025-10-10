@@ -215,7 +215,7 @@ corresponding module"
       ; same as default, but also switch focus to the sidebar
       :desc "Find file in project sidebar" "o P" (lambda () (interactive) (treemacs-find-file) (treemacs-select-window))
 
-      ;; "SPC" #'counsel-M-x
+      "SPC" #'execute-extended-command
 
       "TAB" #'evil-switch-to-windows-last-buffer
 
