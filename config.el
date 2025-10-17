@@ -175,9 +175,22 @@ corresponding module"
   git-link-use-single-line-number t
 
   doom-font-increment 1
+
+  ;; disable tooltip with docs on hover
+  lsp-ui-doc-enable nil
+
+  lsp-lens-enable nil
+
+  ;; use regular posframe errors for lsp instead of the custom sideline
+  lsp-ui-sideline-enable nil
   )
 
-(setq-default line-spacing 4)
+(setq-default
+  line-spacing 4
+
+  compilation-scroll-output t
+  compilation-window-height 20
+  )
 
 (setq projectile-switch-project-action
       (lambda ()
@@ -186,6 +199,32 @@ corresponding module"
           (projectile-find-file))))
 
 (global-centered-cursor-mode)
+
+; stolen from spacemacs :-)
+(defun misc/close-compilation-window ()
+  "Close the window containing the '*compilation*' buffer."
+  (interactive)
+  (when compilation-last-buffer
+    (delete-windows-on compilation-last-buffer)))
+
+; stolen from spacemacs :-)
+(defun misc/window-layout-toggle ()
+  "Toggle between horizontal and vertical layout of two windows."
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((window-tree (car (window-tree)))
+             (current-split-vertical-p (car window-tree))
+             (first-window (nth 2 window-tree))
+             (second-window (nth 3 window-tree))
+             (second-window-state (window-state-get second-window))
+             (splitter (if current-split-vertical-p
+                           #'split-window-horizontally
+                         #'split-window-vertically)))
+        (delete-other-windows first-window)
+        ;; `window-state-put' also re-selects the window if needed, so we don't
+        ;; need to call `select-window'
+        (window-state-put second-window-state (funcall splitter)))
+    (error "Can't toggle window layout when the number of windows isn't two.")))
 
 ;; ----------------------------------------------------------------------------
 ;; Global Keybindings
@@ -233,7 +272,7 @@ corresponding module"
 
       "TAB" #'evil-switch-to-windows-last-buffer
 
-      ;; "c q" #'misc/close-compilation-window
+      "c q" #'misc/close-compilation-window
       "c y" #'evilnc-copy-and-comment-lines
 
       "i k" #'+evil/insert-newline-above
@@ -246,7 +285,7 @@ corresponding module"
       ; C-o j (will use the current directory instead of the project root)
       ;; "p f" #'counsel-projectile-find-file
 
-      ;; "w +" #'misc/window-layout-toggle
+      "w +" #'misc/window-layout-toggle
       "w v" #'+evil/window-vsplit-and-follow
       "w s" #'+evil/window-split-and-follow
       "w x" #'kill-buffer-and-window
