@@ -193,9 +193,6 @@ corresponding module"
 
   ruby-insert-encoding-magic-comment nil
 
-  ;; tune initial frame size
-  ;; initial-frame-alist '((width . 80) (height . 30))
-
   git-link-use-commit t
   git-link-use-single-line-number t
 
@@ -304,11 +301,6 @@ corresponding module"
       "i j" #'+evil/insert-newline-below
 
       "j j" #'avy-goto-char-2
-
-      ; skip doom's wrapper (+ivy/projectile-find-file) which uses the incorrect
-      ; cwd to build the target file when opening target in another window via
-      ; C-o j (will use the current directory instead of the project root)
-      ;; "p f" #'counsel-projectile-find-file
 
       "w +" #'misc/window-layout-toggle
       "w v" #'+evil/window-vsplit-and-follow
