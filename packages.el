@@ -56,3 +56,4 @@
 (package! centered-cursor-mode)
 (package! elm-test-runner)
 (package! git-link)
+(package! reformatter)

@@ -76,6 +76,31 @@
 ;; they are implemented.
 
 ;; ----------------------------------------------------------------------------
+;; Formatters
+;; ----------------------------------------------------------------------------
+
+(use-package! reformatter
+  :config
+  ;; (reformatter-define ormolu
+  ;;   :program "ormolu"
+  ;;   :args (list "--stdin-input-file" buffer-file-name)
+  ;;   )
+
+  ;; (reformatter-define fourmolu
+  ;;   :program "fourmolu")
+
+  ;; (reformatter-define nixfmt
+  ;;   :program "nixfmt")
+
+  (reformatter-define prettier-format
+    :program "prettier"
+    :args
+    (cond
+     (buffer-file-name (list "--stdin-filepath" buffer-file-name))
+     ((eq major-mode 'js2-mode) (list "--parser" "babel"))))
+  )
+
+;; ----------------------------------------------------------------------------
 ;; Elm
 ;; ----------------------------------------------------------------------------
 
