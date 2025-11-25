@@ -29,11 +29,6 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-rouge)
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -74,6 +69,38 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;; ----------------------------------------------------------------------------
+;; Theme
+;; ----------------------------------------------------------------------------
+
+(setq jedi/themes '(
+                    doom-oceanic-next
+                    doom-rouge
+                    ;; doom-ayu-mirage
+                    ;; doom-tomorrow-night
+                    ;; doom-city-lights
+                    ;; doom-nord
+                    doom-nord-light
+                    doom-solarized-light
+                    )
+
+      randomize-theme nil
+
+      ;; There are two ways to load a theme. Both assume the theme is installed and
+      ;; available. You can either set `doom-theme' or manually load a theme with the
+      ;; `load-theme' function. This is the default:
+      doom-theme (if randomize-theme (nth (random (length jedi/themes)) jedi/themes) (car jedi/themes)))
+
+(defun jedi/cycle-theme ()
+  (interactive)
+  (let ((next-theme
+         (or (car (cdr (member doom-theme jedi/themes)))
+             (car jedi/themes))))
+    (progn
+        (message "%s" next-theme)
+        (load-theme next-theme t)
+        (setq doom-theme next-theme))))
 
 ;; ----------------------------------------------------------------------------
 ;; Formatters
