@@ -102,6 +102,11 @@
         (load-theme next-theme t)
         (setq doom-theme next-theme))))
 
+(custom-theme-set-faces! 'doom-oceanic-next
+  ; dim line numbers
+  '(line-number               :foreground "#65737E")
+  )
+
 ;; ----------------------------------------------------------------------------
 ;; Formatters
 ;; ----------------------------------------------------------------------------
