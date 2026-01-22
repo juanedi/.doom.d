@@ -118,8 +118,10 @@
   ;;   :args (list "--stdin-input-file" buffer-file-name)
   ;;   )
 
-  ;; (reformatter-define fourmolu
-  ;;   :program "fourmolu")
+  (reformatter-define ormolu
+    :program "ormolu"
+    :args (list "--stdin-input-file" buffer-file-name)
+    )
 
   ;; (reformatter-define nixfmt
   ;;   :program "nixfmt")
