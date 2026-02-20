@@ -557,8 +557,10 @@ corresponding module"
 ;; mode (which are OK to keep with the rest of the mode's config).
 ;; ----------------------------------------------------------------------------
 
+(global-set-key (kbd "C-s") #'save-buffer)
+(map! :i "C-s" (cmd! (evil-escape) (save-buffer)))
+
 (map!
-  :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
   :n "C-H" #'evil-first-non-blank
   :n "C-L" #'evil-end-of-line
   :n "C-=" #'er/expand-region)
