@@ -286,6 +286,8 @@ corresponding module"
 ;; All keybindings should go here, except those defined that target a specific
 ;; mode (which are OK to keep with the rest of the mode's config).
 ;; ----------------------------------------------------------------------------
+(global-set-key (kbd "C-s") #'save-buffer)
+(map! :i "C-s" (cmd! (evil-escape) (save-buffer)))
 
 (map!
   :i "s-s" (lambda () (interactive) (evil-escape) (save-buffer))
