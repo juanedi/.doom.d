@@ -123,8 +123,8 @@
     :args (list "--stdin-input-file" buffer-file-name)
     )
 
-  ;; (reformatter-define nixfmt
-  ;;   :program "nixfmt")
+  (reformatter-define nixfmt
+    :program "nixfmt")
 
   (reformatter-define prettier-format
     :program "prettier"
