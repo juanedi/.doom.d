@@ -282,6 +282,11 @@ corresponding module"
         (window-state-put second-window-state (funcall splitter)))
     (error "Can't toggle window layout when the number of windows isn't two.")))
 
+;; tell pdf-tools to use my home-manager provided epdfinfo binary so we don't
+;; need to compile it from source (which requires installing dev dependencies).
+(after! pdf-tools
+  (setq pdf-info-epdfinfo-program "~/.nix-profile/bin/epdfinfo"))
+
 ;; ----------------------------------------------------------------------------
 ;; Global Keybindings
 ;;
