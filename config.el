@@ -248,11 +248,12 @@ corresponding module"
   compilation-window-height 20
   )
 
-(setq projectile-switch-project-action
-      (lambda ()
-        (if (file-exists-p (expand-file-name ".git" (projectile-project-root)))
-            (magit-status)
-          (projectile-find-file))))
+(after! projectile
+  (setq projectile-switch-project-action
+        (lambda ()
+          (if (file-exists-p (expand-file-name ".git" (projectile-project-root)))
+              (magit-status)
+            (projectile-find-file)))))
 
 (global-centered-cursor-mode)
 
