@@ -285,7 +285,11 @@ corresponding module"
 ;; tell pdf-tools to use my home-manager provided epdfinfo binary so we don't
 ;; need to compile it from source (which requires installing dev dependencies).
 (after! pdf-tools
-  (setq pdf-info-epdfinfo-program "~/.nix-profile/bin/epdfinfo"))
+  (setq pdf-info-epdfinfo-program "~/.nix-profile/bin/epdfinfo")
+  (add-hook 'pdf-view-mode-hook
+            (lambda ()
+              (setq-local auto-revert-interval 0.2)
+              (auto-revert-mode 1))))
 
 ;; ----------------------------------------------------------------------------
 ;; Global Keybindings
