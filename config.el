@@ -239,6 +239,10 @@ corresponding module"
 
   ;; use regular posframe errors for lsp instead of the custom sideline
   lsp-ui-sideline-enable nil
+
+  compilation-scroll-output t
+
+  tex-fontify-script nil
   )
 
 (setq-default
