@@ -257,6 +257,11 @@ corresponding module"
 
 (global-centered-cursor-mode)
 
+(use-package! caddyfile-mode
+  :mode (("Caddyfile\\'" . caddyfile-mode)
+         ("caddy\\.conf\\'" . caddyfile-mode))
+  )
+
 ; stolen from spacemacs :-)
 (defun misc/close-compilation-window ()
   "Close the window containing the '*compilation*' buffer."

@@ -57,3 +57,4 @@
 (package! elm-test-runner)
 (package! git-link)
 (package! reformatter)
+(package! caddyfile-mode)
