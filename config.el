@@ -107,6 +107,12 @@
   '(line-number               :foreground "#65737E")
   )
 
+(custom-theme-set-faces! 'doom-ayu-mirage
+  ;; make the current line number stand out more
+  '(line-number              :foreground "#484f5b")
+  '(line-number-current-line :foreground "#f5f7fd")
+  )
+
 ;; ----------------------------------------------------------------------------
 ;; Formatters
 ;; ----------------------------------------------------------------------------
