@@ -53,8 +53,8 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
-(package! centered-cursor-mode)
-(package! elm-test-runner)
-(package! git-link)
-(package! reformatter)
-(package! caddyfile-mode)
+(package! centered-cursor-mode :pin "67ef719e685407dbc455c7430765e4e685fd95a9")
+(package! elm-test-runner :pin "b664e50a4c849f5f2e2f434fc01718da10515612")
+(package! git-link :pin "e4cfed05d110a6af07543d069f12e1894f553c2e")
+(package! reformatter :pin "c52e91d5438b9bf16b77b4384822e254f10a6b0a")
+(package! caddyfile-mode :pin "fc41148f5a7eb320f070666f046fb9d88cf17680")
