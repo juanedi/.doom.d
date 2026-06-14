@@ -119,15 +119,13 @@
 
 (use-package! reformatter
   :config
-  ;; (reformatter-define ormolu
-  ;;   :program "ormolu"
-  ;;   :args (list "--stdin-input-file" buffer-file-name)
-  ;;   )
 
   (reformatter-define ormolu
     :program "ormolu"
     :args (list "--stdin-input-file" buffer-file-name)
     )
+
+  (add-hook 'haskell-mode-hook #'ormolu-on-save-mode)
 
   (reformatter-define nixfmt
     :program "nixfmt")
