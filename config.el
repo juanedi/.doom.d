@@ -296,6 +296,26 @@ corresponding module"
         (window-state-put second-window-state (funcall splitter)))
     (error "Can't toggle window layout when the number of windows isn't two.")))
 
+(defun jedi/agent-file-path-pointer ()
+  "Copy a project-relative file pointer for the current line or region for easy paste into claude code / codex"
+  (interactive)
+  (+default/yank-buffer-path-relative-to-project)
+  (let* ((path (current-kill 0 t))
+         (line-pointer
+          (if (use-region-p)
+              (let* ((start (region-beginning))
+                     (end (region-end))
+                     (start-line (line-number-at-pos start))
+                     (end-line (line-number-at-pos (if (> end start) (1- end) end))))
+                (if (= start-line end-line)
+                    (number-to-string start-line)
+                  (format "%s-%s" start-line end-line)))
+            (number-to-string (line-number-at-pos))))
+         (pointer (format "%s:%s" path line-pointer)))
+    (kill-new pointer)
+    (message "Copied path pointer: %s" pointer)
+    pointer))
+
 ;; tell pdf-tools to use my home-manager provided epdfinfo binary so we don't
 ;; need to compile it from source (which requires installing dev dependencies).
 (after! pdf-tools
@@ -359,6 +379,8 @@ corresponding module"
       "i k" #'+evil/insert-newline-above
       "i j" #'+evil/insert-newline-below
 
+      "f a" #'jedi/agent-file-path-pointer
+
       "j j" #'avy-goto-char-2
 
       "w +" #'misc/window-layout-toggle
@@ -377,4 +399,3 @@ corresponding module"
       "8" #'winum-select-window-8
       "9" #'winum-select-window-9
       )
-
