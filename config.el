@@ -253,6 +253,8 @@ corresponding module"
   compilation-scroll-output t
 
   tex-fontify-script nil
+
+  js-indent-level 2
   )
 
 (setq-default
