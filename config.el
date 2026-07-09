@@ -113,6 +113,12 @@
   '(line-number-current-line :foreground "#f5f7fd")
   )
 
+(custom-theme-set-faces! 'doom-ayu-dark
+  ;; make the current line number stand out more
+  '(line-number              :foreground "#373b42")
+  '(line-number-current-line :foreground "#bfbdb6")
+  )
+
 ;; ----------------------------------------------------------------------------
 ;; Formatters
 ;; ----------------------------------------------------------------------------
