@@ -76,7 +76,8 @@
 
 (setq jedi/themes '(
                     doom-oceanic-next
-                    doom-rouge
+                    doom-ayu-dark
+                    ;; doom-rouge
                     ;; doom-ayu-mirage
                     ;; doom-tomorrow-night
                     ;; doom-city-lights
@@ -103,8 +104,8 @@
         (setq doom-theme next-theme))))
 
 (custom-theme-set-faces! 'doom-oceanic-next
-  ; dim line numbers
-  '(line-number               :foreground "#65737E")
+  '(line-number               :foreground "#353F47")
+  '(line-number-current-line  :foreground "#64737E")
   )
 
 (custom-theme-set-faces! 'doom-ayu-mirage
