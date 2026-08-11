@@ -58,3 +58,4 @@
 (package! git-link :pin "e4cfed05d110a6af07543d069f12e1894f553c2e")
 (package! reformatter :pin "c52e91d5438b9bf16b77b4384822e254f10a6b0a")
 (package! caddyfile-mode :pin "fc41148f5a7eb320f070666f046fb9d88cf17680")
+(package! olivetti)

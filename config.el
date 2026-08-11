@@ -279,6 +279,10 @@ corresponding module"
          ("caddy\\.conf\\'" . caddyfile-mode))
   )
 
+(use-package! olivetti
+  :config
+  (setq-default olivetti-body-width 120)
+)
 ; stolen from spacemacs :-)
 (defun misc/close-compilation-window ()
   "Close the window containing the '*compilation*' buffer."
